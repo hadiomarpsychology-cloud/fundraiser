@@ -50,7 +50,6 @@
             max-width: 860px;
         }
 
-        /* Top Header Navigation / Action Bar */
         .top-bar {
             background: rgba(17, 24, 39, 0.8);
             backdrop-filter: blur(12px);
@@ -90,7 +89,6 @@
             gap: 10px;
         }
 
-        /* Hero Card */
         .hero-card {
             background: linear-gradient(135deg, rgba(31, 41, 61, 0.9) 0%, rgba(17, 24, 39, 0.95) 100%);
             border: 1px solid var(--border-accent);
@@ -142,7 +140,6 @@
             max-width: 720px;
         }
 
-        /* Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -183,7 +180,6 @@
             border-color: var(--text-secondary);
         }
 
-        /* Main Section Cards */
         .card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -226,9 +222,6 @@
             margin-bottom: 16px;
         }
 
-        p strong { color: var(--text-primary); }
-
-        /* Tables */
         .budget-table {
             width: 100%;
             border-collapse: separate;
@@ -265,7 +258,6 @@
             font-weight: 700;
         }
 
-        /* Bank Box */
         .bank-card {
             background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(17, 24, 39, 0.8) 100%);
             border: 1px dashed rgba(245, 158, 11, 0.4);
@@ -286,7 +278,6 @@
         .bank-label { color: var(--text-secondary); }
         .bank-value { color: #fff; font-family: monospace; font-weight: 600; }
 
-        /* Services Promotion Highlight Box */
         .hire-box {
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(17, 24, 39, 0.9) 100%);
             border: 1px solid rgba(16, 185, 129, 0.3);
@@ -300,7 +291,20 @@
             gap: 20px;
         }
 
-        /* Interactive Tracker Modal */
+        .audio-container {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 12px;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 8px;
+            border-radius: 8px;
+        }
+
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -347,40 +351,16 @@
             justify-content: center;
         }
 
-        .modal-close:hover { color: #fff; background: rgba(255, 255, 255, 0.15); }
-
-        .progress-group {
-            margin-top: 20px;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .progress-bg {
-            background: rgba(255, 255, 255, 0.08);
-            height: 12px;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--emerald));
-            border-radius: 10px;
-            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        .progress-group { margin-top: 20px; }
+        .progress-header { display: flex; justify-content: space-between; font-size: 0.95rem; margin-bottom: 8px; font-weight: 600; }
+        .progress-bg { background: rgba(255, 255, 255, 0.08); height: 12px; border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--emerald)); border-radius: 10px; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
     </style>
 </head>
 <body>
 
 <div class="wrapper">
 
-    <!-- Top Navigation Bar -->
     <div class="top-bar">
         <div class="brand">
             Hadi Omar <span class="brand-badge">Support Portal</span>
@@ -391,7 +371,6 @@
         </div>
     </div>
 
-    <!-- Hero Header -->
     <div class="hero-card">
         <div class="tag">🎓 M.Sc. Candidate & Practitioner (Union Reg. #410981989)</div>
         <h1>Academic Completion & Relocation Emergency Fund</h1>
@@ -408,7 +387,6 @@
         </div>
     </div>
 
-    <!-- Professional Services Callout Card -->
     <div class="hire-box">
         <div>
             <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 6px;">Looking to Hire or Book Consultations?</h3>
@@ -421,7 +399,6 @@
         </a>
     </div>
 
-    <!-- Background & Story Card -->
     <div class="card">
         <div class="card-header">
             <div class="card-icon">📖</div>
@@ -435,7 +412,22 @@
         </p>
     </div>
 
-    <!-- Immediate 3-Month Living Budget -->
+    <!-- Sound Therapy Track Player Section -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-icon">🎵</div>
+            <h2>Therapeutic Sound Track</h2>
+        </div>
+        <p>Listen to an original therapeutic grounding audio track:</p>
+        <div class="audio-container">
+            <strong style="color: #fff;">Grounding Sound Therapy Session</strong>
+            <audio controls>
+                <source src="track.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+
     <div class="card">
         <div class="card-header">
             <div class="card-icon">💡</div>
@@ -452,46 +444,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Housing Rent</td>
-                    <td>$387</td>
-                    <td>$1,161</td>
-                </tr>
-                <tr>
-                    <td>Electricity & Essential Utilities</td>
-                    <td>$45</td>
-                    <td>$135</td>
-                </tr>
-                <tr>
-                    <td>Groceries & Food Provisions</td>
-                    <td>$200</td>
-                    <td>$600</td>
-                </tr>
-                <tr>
-                    <td>Local Grocery Debt Settlement</td>
-                    <td>One-time</td>
-                    <td>$50</td>
-                </tr>
-                <tr>
-                    <td>Academic Relocation & Visa Admin Prep</td>
-                    <td>One-time</td>
-                    <td>$300</td>
-                </tr>
-                <tr>
-                    <td>Emergency Survival Reserve</td>
-                    <td>$100</td>
-                    <td>$300</td>
-                </tr>
-                <tr>
-                    <td><strong>TOTAL SURVIVAL TARGET</strong></td>
-                    <td></td>
-                    <td><strong>~$2,546 USD</strong></td>
-                </tr>
+                <tr><td>Housing Rent</td><td>$387</td><td>$1,161</td></tr>
+                <tr><td>Electricity & Essential Utilities</td><td>$45</td><td>$135</td></tr>
+                <tr><td>Groceries & Food Provisions</td><td>$200</td><td>$600</td></tr>
+                <tr><td>Local Grocery Debt Settlement</td><td>One-time</td><td>$50</td></tr>
+                <tr><td>Academic Relocation & Visa Admin Prep</td><td>One-time</td><td>$300</td></tr>
+                <tr><td>Emergency Survival Reserve</td><td>$100</td><td>$300</td></tr>
+                <tr><td><strong>TOTAL SURVIVAL TARGET</strong></td><td></td><td><strong>~$2,546 USD</strong></td></tr>
             </tbody>
         </table>
     </div>
 
-    <!-- EU Relocation Target Card -->
     <div class="card">
         <div class="card-header">
             <div class="card-icon">✈️</div>
@@ -508,41 +471,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Visa, Biometrics & Translations</td>
-                    <td>€150 – €250</td>
-                    <td>Degree legalization & translations</td>
-                </tr>
-                <tr>
-                    <td>One-Way Flight</td>
-                    <td>€250 – €500</td>
-                    <td>Regional transit & flight</td>
-                </tr>
-                <tr>
-                    <td>Temporary Stay (First 2 Weeks)</td>
-                    <td>€400 – €800</td>
-                    <td>Initial lodging while apartment hunting</td>
-                </tr>
-                <tr>
-                    <td>Rental Deposit & 1st Month Rent</td>
-                    <td>€1,800 – €3,000</td>
-                    <td>Standard 2-month rental deposit</td>
-                </tr>
-                <tr>
-                    <td>Setting Up Essentials</td>
-                    <td>€500</td>
-                    <td>Bedding, local SIM, transit pass</td>
-                </tr>
-                <tr>
-                    <td>Emergency Safety Net</td>
-                    <td>€1,500 – €2,000</td>
-                    <td>Buffer before first academic stipend</td>
-                </tr>
+                <tr><td>Visa, Biometrics & Translations</td><td>€150 – €250</td><td>Degree legalization & translations</td></tr>
+                <tr><td>One-Way Flight</td><td>€250 – €500</td><td>Regional transit & flight</td></tr>
+                <tr><td>Temporary Stay (First 2 Weeks)</td><td>€400 – €800</td><td>Initial lodging while apartment hunting</td></tr>
+                <tr><td>Rental Deposit & 1st Month Rent</td><td>€1,800 – €3,000</td><td>Standard 2-month rental deposit</td></tr>
+                <tr><td>Setting Up Essentials</td><td>€500</td><td>Bedding, local SIM, transit pass</td></tr>
+                <tr><td>Emergency Safety Net</td><td>€1,500 – €2,000</td><td>Buffer before first academic stipend</td></tr>
             </tbody>
         </table>
     </div>
 
-    <!-- Direct Bank Wire Transfer Card -->
     <div class="card">
         <div class="card-header">
             <div class="card-icon">🏛️</div>
@@ -553,7 +491,7 @@
         <div class="bank-card">
             <div class="bank-row">
                 <span class="bank-label">Account Holder Name</span>
-                <span class="bank-value">Hadi Hasan Mohammed-Saleh Omar</span>
+                <span class="bank-value">HADI OMAR</span>
             </div>
             <div class="bank-row">
                 <span class="bank-label">Bank Name</span>
@@ -561,15 +499,19 @@
             </div>
             <div class="bank-row">
                 <span class="bank-label">Branch</span>
-                <span class="bank-value">Ramallah / Nablus Branch</span>
+                <span class="bank-value">RAMALAHBLD (Ramallah Branch)</span>
+            </div>
+            <div class="bank-row">
+                <span class="bank-label">Basic Account Number</span>
+                <span class="bank-value">529304</span>
             </div>
             <div class="bank-row">
                 <span class="bank-label">SWIFT / BIC Code</span>
-                <span class="bank-value">[Insert SWIFT Code]</span>
+                <span class="bank-value">ARABPS22XXX</span>
             </div>
             <div class="bank-row">
                 <span class="bank-label">IBAN Number</span>
-                <span class="bank-value">[Insert PS... IBAN]</span>
+                <span class="bank-value">PS68 ARAB 0000 0000 9490 5293 0461 0</span>
             </div>
         </div>
         <p style="font-size: 0.85rem; color: var(--amber); margin-top: 12px; margin-bottom: 0;">
@@ -579,7 +521,6 @@
 
 </div>
 
-<!-- Interactive Tracker Popup Modal -->
 <div class="modal-overlay" id="trackerModal" onclick="closeTrackerModalOnOuterClick(event)">
     <div class="modal-content">
         <button class="modal-close" onclick="closeTrackerModal()">✕</button>
@@ -617,7 +558,6 @@
 </div>
 
 <script>
-    // Configurable raised figures - update these numbers anytime
     const raisedUSD = 0;
     const targetUSD = 2546;
 
@@ -628,11 +568,9 @@
         const modal = document.getElementById('trackerModal');
         modal.style.display = 'flex';
 
-        // Calculate percentages
         const pctUSD = Math.min(100, Math.round((raisedUSD / targetUSD) * 100));
         const pctEUR = Math.min(100, Math.round((raisedEUR / targetEUR) * 100));
 
-        // Update UI dynamically
         document.getElementById('usdText').innerText = `$${raisedUSD.toLocaleString()} / $${targetUSD.toLocaleString()} USD (${pctUSD}%)`;
         document.getElementById('usdBar').style.width = pctUSD + '%';
 
