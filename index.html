@@ -3,425 +3,359 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hadi Omar | Master's Thesis & Clinical Impact Fundraiser</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>hadiomar@fundraiser-hub:~</title>
     <style>
         :root {
-            --bg: #090d16;
-            --surface: #111827;
-            --surface-card: #1f293d;
-            --border: #2d3748;
-            --border-accent: rgba(99, 102, 241, 0.35);
-            --text-primary: #f3f4f6;
-            --text-secondary: #9ca3af;
-            --primary: #6366f1;
-            --primary-hover: #4f46e5;
-            --emerald: #10b981;
-            --emerald-bg: rgba(16, 185, 129, 0.1);
-            --amber: #f59e0b;
-            --amber-bg: rgba(245, 158, 11, 0.1);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --bg-color: #0b0f19;
+            --term-bg: #111827;
+            --border-color: #1f2937;
+            --text-main: #d1d5db;
+            --text-muted: #6b7280;
+            --green: #10b981;
+            --blue: #3b82f6;
+            --yellow: #f59e0b;
+            --red: #ef4444;
+            --cyan: #06b6d4;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: var(--bg);
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
-            background-attachment: fixed;
-            color: var(--text-primary);
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-            line-height: 1.6;
-            padding: 40px 20px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
             display: flex;
             justify-content: center;
-        }
-
-        .wrapper { width: 100%; max-width: 900px; }
-
-        .top-bar {
-            background: rgba(17, 24, 39, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 16px 24px;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-            gap: 12px;
+            min-height: 100vh;
         }
 
-        .brand { font-weight: 800; font-size: 1.1rem; color: #fff; display: flex; align-items: center; gap: 8px; }
-        .brand-badge { background: var(--primary); color: #fff; font-size: 0.72rem; padding: 2px 8px; border-radius: 20px; font-weight: 700; text-transform: uppercase; }
+        .container {
+            width: 100%;
+            max-width: 960px;
+        }
 
-        .hero-card {
-            background: linear-gradient(135deg, rgba(31, 41, 61, 0.95) 0%, rgba(17, 24, 39, 0.95) 100%);
-            border: 1px solid var(--border-accent);
-            border-radius: 24px;
-            padding: 36px;
-            margin-bottom: 24px;
-            box-shadow: var(--shadow-lg);
-            position: relative;
+        .terminal-window {
+            background-color: var(--term-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
             overflow: hidden;
         }
 
-        .hero-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--emerald), var(--amber));
+        .terminal-header {
+            background-color: #1f2937;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .tag {
-            display: inline-flex; align-items: center; gap: 6px;
-            background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(245, 158, 11, 0.2);
-            font-size: 0.82rem; font-weight: 600; padding: 6px 12px; border-radius: 30px; margin-bottom: 16px;
+        .buttons { display: flex; gap: 8px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot-red { background-color: var(--red); }
+        .dot-yellow { background-color: var(--yellow); }
+        .dot-green { background-color: var(--green); }
+
+        .title {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: bold;
         }
 
-        h1 { font-size: 2.1rem; font-weight: 800; line-height: 1.25; margin-bottom: 12px; color: #ffffff; letter-spacing: -0.03em; }
-        .subtitle { font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 24px; }
-
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 12px 22px; border-radius: 12px; font-weight: 600; font-size: 0.95rem;
-            text-decoration: none; transition: all 0.2s ease; cursor: pointer; border: none;
+        .terminal-body {
+            padding: 24px;
+            max-height: 80vh;
+            overflow-y: auto;
+            line-height: 1.5;
+            font-size: 0.95rem;
         }
 
-        .btn-work {
-            background: var(--emerald); color: #0d1117; font-weight: 700;
-            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+        .banner-header { color: var(--green); font-weight: bold; }
+        .section-head { color: var(--blue); font-weight: bold; margin-top: 15px; }
+        .highlight { color: var(--yellow); }
+        .accent { color: var(--cyan); }
+
+        a { color: var(--green); text-decoration: underline; }
+        a:hover { color: #fff; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-family: inherit;
         }
 
-        .btn-work:hover { transform: translateY(-2px); background: #059669; color: #fff; }
-
-        .btn-secondary { background: rgba(255, 255, 255, 0.06); color: var(--text-primary); border: 1px solid var(--border); }
-        .btn-secondary:hover { background: rgba(255, 255, 255, 0.12); border-color: var(--text-secondary); }
-
-        .card {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 20px; padding: 32px; margin-bottom: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        th, td {
+            border: 1px solid #374151;
+            padding: 8px 12px;
+            text-align: left;
+            font-size: 0.88rem;
         }
 
-        .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-        .card-icon {
-            width: 42px; height: 42px; border-radius: 12px;
-            background: rgba(99, 102, 241, 0.15); color: var(--primary);
-            display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold;
-        }
-
-        h2 { font-size: 1.4rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
-        p { color: var(--text-secondary); font-size: 1rem; margin-bottom: 16px; }
-        p strong { color: var(--text-primary); }
-
-        .budget-table {
-            width: 100%; border-collapse: separate; border-spacing: 0;
-            margin-top: 16px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
-        }
-
-        .budget-table th, .budget-table td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--border); }
-        .budget-table th { background: rgba(255, 255, 255, 0.03); color: var(--text-secondary); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; }
-        .budget-table td { font-size: 0.95rem; color: var(--text-primary); }
-        .budget-table tr:last-child td { border-bottom: none; background: rgba(99, 102, 241, 0.08); font-weight: 700; }
-
-        .bank-card {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(17, 24, 39, 0.8) 100%);
-            border: 1px dashed rgba(245, 158, 11, 0.4); border-radius: 16px; padding: 24px; margin-top: 12px;
-        }
-
-        .bank-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.95rem; }
-        .bank-row:last-child { border-bottom: none; }
-        .bank-label { color: var(--text-secondary); }
-        .bank-value { color: #fff; font-family: monospace; font-weight: 600; }
+        th { background-color: #1f2937; color: var(--cyan); }
 
         .audio-box {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-accent);
-            padding: 20px; border-radius: 16px; margin-top: 12px;
+            background: #1f2937;
+            border: 1px solid #374151;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 12px 0;
         }
 
-        audio { width: 100%; margin-top: 12px; border-radius: 8px; }
+        audio { width: 100%; margin-top: 8px; }
 
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
-            display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px;
+        .prompt-line { display: flex; align-items: center; margin-top: 15px; }
+        .prompt { color: var(--green); font-weight: bold; }
+        .path { color: var(--blue); }
+        .command { color: #ffffff; margin-left: 8px; }
+
+        input[type="text"] {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            width: 100%;
+            margin-left: 8px;
         }
-
-        .modal-content {
-            background: var(--surface); border: 1px solid var(--border-accent);
-            border-radius: 24px; padding: 32px; width: 100%; max-width: 550px;
-            box-shadow: var(--shadow-lg); position: relative; animation: modalFadeIn 0.25s ease-out;
-        }
-
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .modal-close {
-            position: absolute; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.08);
-            border: none; color: var(--text-secondary); font-size: 1.2rem; width: 36px; height: 36px;
-            border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
-        }
-
-        .progress-group { margin-top: 20px; }
-        .progress-header { display: flex; justify-content: space-between; font-size: 0.95rem; margin-bottom: 8px; font-weight: 600; }
-        .progress-bg { background: rgba(255, 255, 255, 0.08); height: 12px; border-radius: 10px; overflow: hidden; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--emerald)); border-radius: 10px; transition: width 0.8s ease; }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
-
-    <div class="top-bar">
-        <div class="brand">
-            Hadi Omar <span class="brand-badge">Impact Study Portal</span>
-        </div>
-        <div class="top-actions">
-            <button class="btn btn-secondary" onclick="openTrackerModal()">📊 Funding Tracker</button>
-            <a href="https://wa.me/970569903815" target="_blank" class="btn btn-secondary">💬 WhatsApp</a>
-        </div>
-    </div>
-
-    <div class="hero-card">
-        <div class="tag">🎓 M.Sc. Clinical Psychology Candidate | Official Thesis Reg. #12557915</div>
-        <h1>Finalizing Master’s Clinical Track & Continuous Trauma Research</h1>
-        <p class="subtitle">
-            An-Najah National University | Member, Union of Psychological & Social Workers (ID: 410981989). 
-            Funding the validation of groundbreaking non-triggering trauma frameworks (PCTSS & GS-CTSS) and clinical degree completion.
-        </p>
-        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <a href="https://hadiomarpsychology-cloud.github.io/my-hub/" target="_blank" class="btn btn-work">
-                🔗 Official Practice Hub (Hire / Book Services)
-            </a>
-            <button class="btn btn-secondary" onclick="openTrackerModal()">
-                📊 Interactive Funding Tracker
-            </button>
-        </div>
-    </div>
-
-    <!-- Album Concept & Ethnomusicological Grounding -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-icon">🎵</div>
-            <h2>The Audio Project: Congolese Drums & Global South Unity</h2>
-        </div>
-        <p>
-            <strong>Central Premise:</strong> Historically in Central Africa, Congolese drums communicated nationwide phenomena across vast distances. This project places Congolese drums at the center, weaving musical elements from over <strong>50 continental African nations</strong> into unified instrumental tracks.
-        </p>
-        <p>
-            Traced from Felakutism, 70s dancehall, and early hip-hop’s core principles of <em>Peace, Love, Unity, and Having Fun</em>, this album operates as a musical march toward Palestine and global solidarity.
-        </p>
-        <p>
-            <strong>Clinical & Interdisciplinary Foundation:</strong> Developed alongside Master's thesis work on non-triggering PTSD models (PCTSS), Solfeggio frequencies, legal frameworks, and feminist studies. By providing instrumental, non-verbal sound therapy, this music allows clinical guidance beyond the physical therapy room, fostering cross-cultural resilience, anti-colonial non-conformity, and faith-based unity.
-        </p>
-
-        <div class="audio-box">
-            <strong style="color: #fff; font-size: 1rem;">🎧 Stream Full Album Track (Stream-Only Playback)</strong>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px;">Direct download is disabled to preserve streaming integrity.</p>
-            <audio controls controlsList="nodownload" oncontextmenu="return false;">
-                <source src="album.mp3" type="audio/mpeg">
-                Your browser does not support audio playback.
-            </audio>
-        </div>
-    </div>
-
-    <!-- Executive Summary & Scientific Gap -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-icon">🔬</div>
-            <h2>Fundraiser Impact Study: Solving the Clinical Gap</h2>
-        </div>
-        <p>
-            <strong>The Theoretical Problem:</strong> Western diagnostic models (e.g., DSM-5 PTSD) assume trauma is a past event that has ended. For populations under ongoing conflict or chronic insecurity, danger is continuous. Standard diagnostic scales often misdiagnose normal survival adaptations as pathology or force participants to re-live traumatic memories.
-        </p>
-        <p>
-            <strong>The Solution (PCTSS & GS-CTSS):</strong> This fundraiser supports the field administration, validation, and open-access publication of two non-triggering scales evaluating 9 critical domains:
-        </p>
-
-        <ul style="color: var(--text-secondary); padding-left: 20px; font-size: 0.95rem; line-height: 1.8;">
-            <li>Daily Continuous Trauma & Threat Exposure</li>
-            <li>Media Retraumatization & Digital Warfare</li>
-            <li>Normalization of Survival & Emotional Exhaustion</li>
-            <li>Identity & Sociopolitical Pressure</li>
-            <li>Economic, Civil, & Mobility Stress</li>
-            <li>Neurophysiological Stress & Autonomic Dysregulation</li>
-            <li>Functional Dissociation & Survival Adaptation</li>
-            <li>Emotional Numbing & Conscious Community</li>
-            <li>Collective Survival & Existential Anxiety</li>
-        </ul>
-    </div>
-
-    <!-- Allocation Framework Table -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-icon">📋</div>
-            <h2>Targeted Allocation Framework (Where Every Dollar Goes)</h2>
-        </div>
-        <p>Having completed 30 of 42 M.Sc. credit hours (2.97 GPA), this transparent allocation framework breaks down the exact operational costs required to finalize the degree and field research:</p>
-
-        <table class="budget-table">
-            <thead>
-                <tr>
-                    <th>Category</th>
-                    <th>Scope & Deliverables</th>
-                    <th>Allocation</th>
-                    <th>Impact Return</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>1. Academic Completion</strong></td>
-                    <td>Final 12 Credit Hours Tuition & Defense Fees (An-Najah University)</td>
-                    <td>$1,800 – $2,400</td>
-                    <td>Secures M.Sc. in Clinical Psychology & official licensure.</td>
-                </tr>
-                <tr>
-                    <td><strong>2. Field Data Collection</strong></td>
-                    <td>Fieldwork, Printing 90-Item Inventories, Survey Logistics (N = 350-500+)</td>
-                    <td>$700 – $900</td>
-                    <td>Covers stratified sampling across West Bank & Jerusalem.</td>
-                </tr>
-                <tr>
-                    <td><strong>3. Psychometric Analysis</strong></td>
-                    <td>Software Licenses (SPSS, AMOS / R) & Expert Advisory</td>
-                    <td>$200 – $400</td>
-                    <td>Enables Factor Analysis (EFA/CFA) & reliability testing.</td>
-                </tr>
-                <tr>
-                    <td><strong>4. Living & Writing Buffer</strong></td>
-                    <td>2–3 Months Living & Rent Support during field data collection</td>
-                    <td>$1,200 – $1,800</td>
-                    <td>Allows full-time focus on data processing & manuscript writing.</td>
-                </tr>
-                <tr>
-                    <td><strong>TOTAL GOAL</strong></td>
-                    <td><strong>Comprehensive Academic & Research Finalization</strong></td>
-                    <td><strong>$3,900 – $5,500</strong></td>
-                    <td><strong>Delivers Master's degree & validated open-access trauma scale.</strong></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Tangible Outcomes & Donor ROI -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-icon">💎</div>
-            <h2>Tangible Deliverables & Donor ROI</h2>
-        </div>
-        <ul style="color: var(--text-secondary); padding-left: 20px; font-size: 0.95rem; line-height: 1.8;">
-            <li><strong>Official M.Sc. Degree Completion:</strong> Final defense of registered thesis (#12557915) at An-Najah National University.</li>
-            <li><strong>Open-Access Academic Publication:</strong> Submission of the validated PCTSS scale to peer-reviewed international journals (e.g., <em>Transcultural Psychiatry</em>).</li>
-            <li><strong>Public Clinical Tool:</strong> Free, validated diagnostic instrument made available to Palestinian NGOs and Global South practitioners.</li>
-            <li><strong>Direct Progress Reports:</strong> Donors receive bi-monthly research updates and early draft access to manuscripts.</li>
-        </ul>
-    </div>
-
-    <!-- Banking Wire Details -->
-    <div class="card">
-        <div class="card-header">
-            <div class="card-icon">🏛️</div>
-            <h2>Direct Wire Transfer Details (Arab Bank PLC)</h2>
-        </div>
-        <div class="bank-card">
-            <div class="bank-row">
-                <span class="bank-label">Account Holder Name</span>
-                <span class="bank-value">HADI OMAR</span>
+<div class="container">
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <div class="buttons">
+                <div class="dot dot-red"></div>
+                <div class="dot dot-yellow"></div>
+                <div class="dot dot-green"></div>
             </div>
-            <div class="bank-row">
-                <span class="bank-label">Bank Name</span>
-                <span class="bank-value">Arab Bank PLC</span>
-            </div>
-            <div class="bank-row">
-                <span class="bank-label">Branch</span>
-                <span class="bank-value">RAMALAHBLD (Ramallah Branch)</span>
-            </div>
-            <div class="bank-row">
-                <span class="bank-label">Basic Account Number</span>
-                <span class="bank-value">529304</span>
-            </div>
-            <div class="bank-row">
-                <span class="bank-label">SWIFT / BIC Code</span>
-                <span class="bank-value">ARABPS22XXX</span>
-            </div>
-            <div class="bank-row">
-                <span class="bank-label">IBAN Number</span>
-                <span class="bank-value">PS68 ARAB 0000 0000 9490 5293 0461 0</span>
-            </div>
+            <div class="title">hadiomar@fundraiser-hub:~ (bash)</div>
         </div>
-        <p style="font-size: 0.85rem; color: var(--amber); margin-top: 12px; margin-bottom: 0;">
-            * Senders: Please mark transfer notes as <strong>"Personal Gift"</strong> or <strong>"Living Support"</strong> for smooth processing.
-        </p>
-    </div>
 
+        <div class="terminal-body" id="terminal-body">
+            
+<pre class="banner-header">
+================================================================================
+HADI OMAR | MASTER'S CLINICAL PSYCHOLOGY TRACK & EMERGENCY SUPPORT HUB
+================================================================================
+[INFO] M.Sc. Candidate in Psychology | An-Najah National University
+[INFO] Registered Member, Union of Psychological & Social Workers (#410981989)
+[INFO] Official Master's Thesis Registration No.: 12557915
+================================================================================
+</pre>
+
+<div class="section-head">[1. EXECUTIVE SUMMARY & CLINICAL GAP]</div>
+<p>
+Traditional Western diagnostic models (DSM-5 PTSD) assume trauma is a past event. For populations living under continuous conflict, danger is ongoing. Standard scales risk misdiagnosing survival adaptations or re-traumatizing clients.
+</p>
+<p>
+This campaign funds tuition for my final 12 M.Sc. credit hours, living stability, and the field validation of two non-triggering psychometric instruments:
+<br>• <span class="highlight">PCTSS</span>: Palestinian Continuous Traumatic Stress Scale (90 items, 9 domains)
+<br>• <span class="highlight">GS-CTSS</span>: Global South Continuous Traumatic Stress Scale
+</p>
+
+<div class="section-head">[2. STREAMABLE ALBUM: CONGOLESE DRUMS & GLOBAL SOUTH UNITY]</div>
+<p>
+Historically in Central Africa, Congolese drums communicated nationwide phenomena across vast distances. This project places Congolese drums at the center, weaving musical elements from over 50 continental African nations into a unified instrumental track (Felakutism, 70s dancehall/hip-hop roots of Peace, Love, Unity, and non-triggering sound therapy).
+</p>
+
+<div class="audio-box">
+    <div style="color: #fff; font-weight: bold;">🎧 album.mp3 (Stream-Only Audio Stream)</div>
+    <audio controls controlsList="nodownload" oncontextmenu="return false;">
+        <source src="album.mp3" type="audio/mpeg">
+        Audio playback not supported in this browser.
+    </audio>
 </div>
 
-<!-- Interactive Progress Modal -->
-<div class="modal-overlay" id="trackerModal" onclick="closeTrackerModalOnOuterClick(event)">
-    <div class="modal-content">
-        <button class="modal-close" onclick="closeTrackerModal()">✕</button>
-        
-        <div class="card-header" style="margin-bottom: 12px;">
-            <div class="card-icon">📊</div>
-            <h2>Live Transparency Tracker</h2>
-        </div>
-        <p style="font-size: 0.9rem;">Real-time progress toward academic completion and research allocation:</p>
+<div class="section-head">[3. ALLOCATION FRAMEWORK & TARGETED BUDGET ($3,900 – $5,500 USD)]</div>
+<table>
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Scope & Deliverables</th>
+            <th>Allocation</th>
+            <th>Impact Deliverable</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1. Academic Completion</td>
+            <td>Final 12 Credit Hours & Thesis Defense Fees (An-Najah)</td>
+            <td>$1,800 – $2,400</td>
+            <td>M.Sc. Clinical Psychology Degree & Licensure</td>
+        </tr>
+        <tr>
+            <td>2. Field Data Collection</td>
+            <td>Printing 90-Item Inventories, Field Logistics (N = 350-500+)</td>
+            <td>$700 – $900</td>
+            <td>West Bank & Jerusalem stratified sampling</td>
+        </tr>
+        <tr>
+            <td>3. Psychometric Analysis</td>
+            <td>Software Licenses (SPSS, AMOS / R) & Statistical Advisory</td>
+            <td>$200 – $400</td>
+            <td>Factor Analysis (EFA/CFA) & reliability testing</td>
+        </tr>
+        <tr>
+            <td>4. Living & Rent Buffer</td>
+            <td>2–3 Months Rent & Basic Needs during thesis writing phase</td>
+            <td>$1,200 – $1,800</td>
+            <td>Full-time research execution & manuscript prep</td>
+        </tr>
+        <tr>
+            <td><strong>TOTAL GOAL</strong></td>
+            <td><strong>Comprehensive Academic & Research Finalization</strong></td>
+            <td><strong>$3,900 – $5,500</strong></td>
+            <td><strong>Degree completion & open-access trauma scale</strong></td>
+        </tr>
+    </tbody>
+</table>
 
-        <div class="progress-group">
-            <div class="progress-header">
-                <span>Immediate 3-Month Target ($2,546 USD)</span>
-                <span id="usdText" style="color: var(--emerald);">$0 / $2,546</span>
-            </div>
-            <div class="progress-bg">
-                <div class="progress-fill" id="usdBar" style="width: 0%;"></div>
-            </div>
-        </div>
+<div class="section-head">[4. DIRECT BANK WIRE TRANSFER DETAILS]</div>
+<p style="font-family: monospace;">
+Bank Name           : Arab Bank PLC<br>
+Account Holder Name : HADI OMAR<br>
+Branch              : RAMALAHBLD (Ramallah Branch)<br>
+Basic Account No.   : 529304<br>
+SWIFT / BIC Code    : ARABPS22XXX<br>
+IBAN Number         : PS68 ARAB 0000 0000 9490 5293 0461 0<br>
+<span class="highlight">* Reference note for transfers: "Personal Gift" or "Living Support"</span>
+</p>
 
-        <div class="progress-group" style="margin-top: 24px;">
-            <div class="progress-header">
-                <span>Total Research & Thesis Finalization Goal ($4,700 USD)</span>
-                <span id="researchText" style="color: var(--primary);">$0 / $4,700</span>
-            </div>
-            <div class="progress-bg">
-                <div class="progress-fill" id="researchBar" style="width: 0%;"></div>
-            </div>
-        </div>
+<div class="section-head">[5. OFFICIAL PRACTICE HUB & SERVICES]</div>
+<p>
+To hire professional services (psychotherapy, academic coaching, sound therapy):<br>
+🔗 <a href="https://hadiomarpsychology-cloud.github.io/my-hub/" target="_blank">https://hadiomarpsychology-cloud.github.io/my-hub/</a>
+</p>
 
-        <div style="margin-top: 28px; text-align: center;">
-            <button class="btn btn-secondary" onclick="closeTrackerModal()" style="width: 100%;">Close Tracker</button>
+<div class="section-head">[6. UNIVERSAL MULTILINGUAL DEDICATION]</div>
+<p style="text-align: center; font-weight: bold; color: #fff; margin-top: 10px;">
+AMAN / AMEN / 安<br>
+<span style="font-size: 0.85rem; color: var(--green);">(Safety • Peace • Consent • Truth • Universal Family)</span>
+</p>
+<p style="font-style: italic; text-align: center; color: var(--text-muted);">
+"Seven languages, hundreds of cultures, one pulse of Congolese rhythm: A shared universal affirmation of peace, love, and gratitude to everyone listening, supporting, and standing together."
+</p>
+<p style="text-align: center; color: var(--cyan); font-size: 0.88rem;">
+Salam & Aman (سلام / امن) • Paz & Amor • Paix & Bienveillance • Hé & Gǎn'ēn (和 / 感恩) • Ham-dali & Mehr (همدلی و مهر) • Inayat & Mohabbat (عنایت و محبت) • Peace & Kinship
+</p>
+
+<hr style="border-color: #374151; margin: 20px 0;">
+
+<p style="color: var(--yellow);">
+Type <span class="accent">'help'</span> for shortcut commands, <span class="accent">'tracker'</span> to open progress status, or <span class="accent">'clear'</span>.
+</p>
+
+            <div id="history"></div>
+
+            <div class="prompt-line">
+                <span class="prompt">hadiomar@support</span>:<span class="path">~</span>$
+                <input type="text" id="command-input" autofocus autocomplete="off">
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-    const raisedUSD = 0;
-    const targetUSD = 2546;
+    const input = document.getElementById('command-input');
+    const history = document.getElementById('history');
+    const terminalBody = document.getElementById('terminal-body');
 
-    const raisedResearchUSD = 0;
-    const targetResearchUSD = 4700;
+    const trackerData = {
+        targetUSD: 2546,
+        raisedUSD: 0,
+        researchTargetUSD: 4700,
+        researchRaisedUSD: 0
+    };
 
-    function openTrackerModal() {
-        const modal = document.getElementById('trackerModal');
-        modal.style.display = 'flex';
+    const commands = {
+        help: `AVAILABLE TERMINAL COMMANDS:
+  - story       : Print thesis background & research gap
+  - budget      : Print target allocation table
+  - bank        : Print Arab Bank transfer details
+  - audio       : Print audio album information
+  - tracker     : Display live funding progress
+  - services    : Direct link to official practice hub
+  - clear       : Clear terminal screen`,
 
-        const pctUSD = Math.min(100, Math.round((raisedUSD / targetUSD) * 100));
-        const pctResearch = Math.min(100, Math.round((raisedResearchUSD / targetResearchUSD) * 100));
+        story: `RESEARCH STORY & THESIS GAP:
+Master's Candidate in Clinical Psychology (An-Najah National University). Registered Thesis #12557915.
+Developing PCTSS (Palestinian Continuous Traumatic Stress Scale) to measure ongoing trauma without triggering participants.`,
 
-        document.getElementById('usdText').innerText = `$${raisedUSD.toLocaleString()} / $${targetUSD.toLocaleString()} USD (${pctUSD}%)`;
-        document.getElementById('usdBar').style.width = pctUSD + '%';
+        services: `OFFICIAL PRACTICE HUB:
+Visit my clean clinical practice hub to hire or book services:
+🔗 https://hadiomarpsychology-cloud.github.io/my-hub/`,
 
-        document.getElementById('researchText').innerText = `$${raisedResearchUSD.toLocaleString()} / $${targetResearchUSD.toLocaleString()} USD (${pctResearch}%)`;
-        document.getElementById('researchBar').style.width = pctResearch + '%';
+        budget: `ALLOCATION BREAKDOWN:
+1. Academic Completion : $1,800 - $2,400
+2. Fieldwork Logistics : $700 - $900
+3. Statistical Software: $200 - $400
+4. Rent & Living Buffer : $1,200 - $1,800
+TOTAL GOAL            : $3,900 - $5,500`,
+
+        bank: `ARAB BANK WIRE DETAILS:
+Account Name : HADI OMAR
+Bank         : Arab Bank PLC
+Branch       : RAMALAHBLD
+SWIFT        : ARABPS22XXX
+IBAN         : PS68 ARAB 0000 0000 9490 5293 0461 0`,
+
+        audio: `ALBUM STREAM:
+Congolese Drums & Global South Unity Track embedded above in index stream.`
+    };
+
+    function renderTracker() {
+        const pct1 = Math.min(100, Math.round((trackerData.raisedUSD / trackerData.targetUSD) * 100));
+        const pct2 = Math.min(100, Math.round((trackerData.researchRaisedUSD / trackerData.researchTargetUSD) * 100));
+
+        return `LIVE FUNDING TRACKER STATUS:
+
+1. Immediate Survival Target ($2,546 USD):
+Raised: $${trackerData.raisedUSD} / $${trackerData.targetUSD} USD (${pct1}%)
+[${'='.repeat(Math.floor(pct1 / 5))}${' '.repeat(20 - Math.floor(pct1 / 5))}]
+
+2. Total Research & Degree Finalization ($4,700 USD):
+Raised: $${trackerData.researchRaisedUSD} / $${trackerData.researchTargetUSD} USD (${pct2}%)
+[${'='.repeat(Math.floor(pct2 / 5))}${' '.repeat(20 - Math.floor(pct2 / 5))}]`;
     }
 
-    function closeTrackerModal() { document.getElementById('trackerModal').style.display = 'none'; }
-    function closeTrackerModalOnOuterClick(e) { if (e.target.id === 'trackerModal') closeTrackerModal(); }
+    input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            const cmd = input.value.trim().toLowerCase();
+            input.value = '';
+
+            const promptElement = document.createElement('div');
+            promptElement.className = 'prompt-line';
+            promptElement.innerHTML = `<span class="prompt">hadiomar@support</span>:<span class="path">~</span>$ <span class="command">${cmd}</span>`;
+            history.appendChild(promptElement);
+
+            const outputElement = document.createElement('div');
+            outputElement.className = 'output';
+            outputElement.style.color = '#d1d5db';
+            outputElement.style.marginTop = '6px';
+            outputElement.style.whiteSpace = 'pre-wrap';
+
+            if (cmd === 'clear') {
+                history.innerHTML = '';
+                return;
+            } else if (cmd === 'tracker') {
+                outputElement.textContent = renderTracker();
+            } else if (commands[cmd]) {
+                outputElement.textContent = commands[cmd];
+            } else if (cmd !== '') {
+                outputElement.textContent = `zsh: command not found: ${cmd}. Type 'help' for available commands.`;
+            }
+
+            history.appendChild(outputElement);
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+    });
 </script>
 
 </body>
