@@ -108,6 +108,37 @@
 
         audio { width: 100%; margin-top: 8px; }
 
+        .bank-box {
+            background: #1f2937;
+            border: 1px dashed var(--yellow);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .action-btn {
+            background-color: #374151;
+            color: var(--green);
+            border: 1px solid var(--green);
+            padding: 8px 14px;
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 8px;
+            margin-right: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .action-btn:hover {
+            background-color: var(--green);
+            color: #0b0f19;
+        }
+
         .prompt-line { display: flex; align-items: center; margin-top: 15px; }
         .prompt { color: var(--green); font-weight: bold; }
         .path { color: var(--blue); }
@@ -175,13 +206,9 @@ Historically in Central Africa, Congolese drums communicated nationwide phenomen
 <p class="highlight">
 "When listening to music and looking up at the night sky, every star represents a listener, a friend, family, a fellow traveler, and a creature of peace. This sound is dedicated to every star."
 </p>
-<p>
-<em>Future Horizon: Expanding this Afro-Asian-Indo-European integration into Gaelic, Celtic, Catalan, Latin, and English linguistic roots—celebrating a single shared human language of love, prosperity, and mutual understanding.</em>
-</p>
 
 <div class="audio-box">
     <div style="color: #fff; font-weight: bold;">🎧 album.mp3 (Stream-Only Continuous Loop)</div>
-    <!-- Loop attribute added for continuous playback -->
     <audio controls loop controlsList="nodownload" oncontextmenu="return false;">
         <source src="album.mp3" type="audio/mpeg">
         Audio playback not supported in this browser.
@@ -233,15 +260,24 @@ Historically in Central Africa, Congolese drums communicated nationwide phenomen
 </table>
 
 <div class="section-head">[5. DIRECT BANK WIRE TRANSFER DETAILS]</div>
-<p style="font-family: monospace;">
-Bank Name           : Arab Bank PLC<br>
-Account Holder Name : HADI<br>
-Branch              : RAMALAHBLD (Ramallah Branch)<br>
-Basic Account No.   : 529304<br>
-SWIFT / BIC Code    : ARABPS22XXX<br>
-IBAN Number         : PS68 ARAB 0000 0000 9490 5293 0461 0<br>
-<span class="highlight">* Reference note for transfers: "Personal Gift" or "Living Support"</span>
-</p>
+
+<div class="bank-box">
+    <p style="font-family: monospace; line-height: 1.8;">
+    Bank Name           : Arab Bank PLC<br>
+    Account Holder Name : HADI<br>
+    Branch              : RAMALAHBLD (Ramallah Branch)<br>
+    Basic Account No.   : 529304<br>
+    SWIFT / BIC Code    : ARABPS22XXX<br>
+    IBAN Number         : PS68 ARAB 0000 0000 9490 5293 0461 0<br>
+    <span class="highlight">* Reference note for transfers: "Personal Gift" or "Living Support"</span>
+    </p>
+
+    <div style="margin-top: 15px;">
+        <button class="action-btn" onclick="copyIBAN()">📋 Copy IBAN</button>
+        <button class="action-btn" onclick="copyAllDetails()">📋 Copy All Details</button>
+    </div>
+    <span id="copy-status" style="color: var(--green); font-size: 0.85rem; margin-top: 8px; display: block;"></span>
+</div>
 
 <div class="section-head">[6. OFFICIAL PRACTICE HUB & SERVICES]</div>
 <p>
@@ -281,6 +317,29 @@ Type <span class="accent">'help'</span> for shortcut commands, <span class="acce
     const input = document.getElementById('command-input');
     const history = document.getElementById('history');
     const terminalBody = document.getElementById('terminal-body');
+
+    const ibanNumber = "PS68 ARAB 0000 0000 9490 5293 0461 0";
+    const fullBankDetails = `Account Name: HADI
+Bank: Arab Bank PLC
+Branch: RAMALAHBLD (Ramallah Branch)
+Account No: 529304
+SWIFT: ARABPS22XXX
+IBAN: PS68 ARAB 0000 0000 9490 5293 0461 0
+Reference Note: Personal Gift / Living Support`;
+
+    function copyIBAN() {
+        navigator.clipboard.writeText(ibanNumber);
+        const status = document.getElementById('copy-status');
+        status.textContent = "✓ IBAN copied to clipboard!";
+        setTimeout(() => { status.textContent = ""; }, 3000);
+    }
+
+    function copyAllDetails() {
+        navigator.clipboard.writeText(fullBankDetails);
+        const status = document.getElementById('copy-status');
+        status.textContent = "✓ All bank transfer details copied to clipboard!";
+        setTimeout(() => { status.textContent = ""; }, 3000);
+    }
 
     const trackerData = {
         targetUSD: 2546,
@@ -322,7 +381,7 @@ SWIFT        : ARABPS22XXX
 IBAN         : PS68 ARAB 0000 0000 9490 5293 0461 0`,
 
         audio: `ALBUM STREAM:
-Congolese Drums & Global South Unity Track embedded above in index stream (looping enabled).`
+Congolese Drums & Global South Unity Track embedded above in index stream.`
     };
 
     function renderTracker() {
