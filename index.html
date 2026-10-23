@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hadi Omar | Emergency Support & Academic Fundraiser</title>
+    <title>Hadi Omar | Academic Completion & Relocation Support Hub</title>
     <style>
         :root {
             --bg-color: #0d1117;
@@ -29,7 +29,7 @@
 
         .container {
             width: 100%;
-            max-width: 900px;
+            max-width: 920px;
         }
 
         .banner {
@@ -72,9 +72,7 @@
             transition: background 0.2s;
         }
 
-        .btn:hover {
-            background-color: #30363d;
-        }
+        .btn:hover { background-color: #30363d; }
 
         .btn-primary {
             background-color: var(--accent-green);
@@ -120,7 +118,7 @@
 
         .terminal-body {
             padding: 20px;
-            max-height: 70vh;
+            max-height: 75vh;
             overflow-y: auto;
             line-height: 1.6;
         }
@@ -157,19 +155,17 @@
 <body>
 
 <div class="container">
-    <!-- Top Banner & Cross-Link to Work Hub -->
     <div class="banner">
-        <h1>Hadi Omar | Emergency Support & Academic Completion Fund</h1>
-        <p>M.Sc. Candidate in Psychology | Union Reg. #410981989</p>
-        <p>Separate support & transparency portal. Looking to hire professional services instead?</p>
+        <h1>Hadi Omar | Emergency Support & Master's Degree Fundraiser</h1>
+        <p>Mental Health Practitioner & M.Sc. Candidate in Psychology (Union Reg. #410981989)</p>
+        <p>Dedicated fundraiser portal. Looking to hire professional services instead?</p>
         
         <div class="cta-buttons">
-            <a href="https://hadiomarpsychology-cloud.github.io/my-hub/" target="_blank" class="btn btn-primary">🔗 Visit Professional Work Hub & Book Services</a>
+            <a href="https://hadiomarpsychology-cloud.github.io/my-hub/" target="_blank" class="btn btn-primary">🔗 Official Practice Hub (Hire / Book Services)</a>
             <a href="https://wa.me/970569903815" target="_blank" class="btn">💬 WhatsApp (+970 56 990 3815)</a>
         </div>
     </div>
 
-    <!-- Interactive Terminal Window -->
     <div class="terminal-window">
         <div class="terminal-header">
             <div class="buttons">
@@ -183,10 +179,69 @@
         <div class="terminal-body" id="terminal-body">
             <div class="output">
 ================================================================================
-Welcome to Hadi Omar's Fundraiser & Transparency Terminal
+HADI OMAR | EMERGENCY SURVIVAL, THESIS COMPLETION & RELOCATION FUND
 ================================================================================
-Type <span style="color:var(--accent-yellow)">'help'</span> to see available commands.
-Quick commands: <span style="color:var(--accent-yellow)">'story'</span>, <span style="color:var(--accent-yellow)">'budget'</span>, <span style="color:var(--accent-yellow)">'relocation'</span>, <span style="color:var(--accent-yellow)">'bank'</span>, <span style="color:var(--accent-yellow)">'tracker'</span>, <span style="color:var(--accent-yellow)">'services'</span>
+
+[1. BACKGROUND & SITUATION]
+I am a Mental Health Practitioner, Educator, and M.Sc. Candidate in Psychology 
+(Union Reg. #410981989) with 12 credit hours remaining until graduation. 
+
+While my academic tuition is fully covered, severe regional economic instability 
+and acute disruptions have depleted basic living resources. This campaign exists 
+to cover immediate basic survival (housing rent, utility costs, grocery debt) 
+while enabling me to complete my thesis work and transition toward international 
+academic relocation in Europe.
+
+--------------------------------------------------------------------------------
+
+[2. IMMEDIATE 3-MONTH SURVIVAL BUDGET ($2,546 USD TARGET)]
++------------------------------------+----------------+------------------+
+| Expense Category                   | Monthly (USD)  | 3-Month Target   |
++------------------------------------+----------------+------------------+
+| Housing Rent                       | $387           | $1,161           |
+| Electricity & Essential Utilities  | $45            | $135             |
+| Groceries & Provisions             | $200           | $600             |
+| Local Debt Settlement (Groceries)  | $50 (One-time) | $50              |
+| Academic Relocation & Visa Prep    | $300           | $300             |
+| Emergency Buffer                   | $100           | $300             |
++------------------------------------+----------------+------------------+
+| TOTAL IMMEDIATE SURVIVAL TARGET    |                | ~$2,546 USD      |
++------------------------------------+----------------+------------------+
+
+--------------------------------------------------------------------------------
+
+[3. EU VISA & INTERNATIONAL RELOCATION BUDGET (€4,600 – €7,050 EUR)]
+Category                         Estimated Cost (Euro)   Notes
+-------------------------------------------------------------------------------------------------
+Visa, Biometrics & Translations  €150 – €250             Includes degree translation & legalization.
+One-way Flight (Jordan/TLV-EU)   €250 – €500             Depends on travel season.
+Temporary Stay (First 2 weeks)   €400 – €800             Initial lodging while apartment hunting.
+Rental Deposit & 1st Month Rent  €1,800 – €3,000         Standard 2-month deposit requirement.
+Setting Up (Food, Sim, Bedding)  €500                    Essential furniture & local transit.
+Emergency Safety Net             €1,500 – €2,000         Safety buffer prior to stipend/paycheck.
+-------------------------------------------------------------------------------------------------
+ESTIMATED TOTAL RELOCATION RANGE: €4,600 – €7,050 EUR
+
+--------------------------------------------------------------------------------
+
+[4. DIRECT BANK TRANSFER DETAILS]
+Bank Name           : Arab Bank PLC
+Account Holder Name : Hadi Hasan Mohammed-Saleh Omar
+Branch              : Ramallah / Nablus Branch
+SWIFT / BIC         : [Insert Your SWIFT Code]
+IBAN Number         : [Insert Your PS... IBAN Number]
+
+* Note: Please mark transfer notes as "Personal Gift" or "Living Support".
+
+--------------------------------------------------------------------------------
+
+[5. HIRE MY PROFESSIONAL SERVICES]
+If you prefer to support through work, you can hire me for online psychotherapy, 
+academic coaching, sound therapy, or research consultations via my clean hub:
+🔗 https://hadiomarpsychology-cloud.github.io/my-hub/
+
+================================================================================
+Type <span style="color:var(--accent-yellow)">'help'</span> for shortcut commands or <span style="color:var(--accent-yellow)">'tracker'</span> for live funding progress.
             </div>
 
             <div id="history"></div>
@@ -204,7 +259,6 @@ Quick commands: <span style="color:var(--accent-yellow)">'story'</span>, <span s
     const history = document.getElementById('history');
     const terminalBody = document.getElementById('terminal-body');
 
-    // Live funding progress targets
     const trackerData = {
         immediateTargetUSD: 2546,
         immediateRaisedUSD: 0,
@@ -214,88 +268,48 @@ Quick commands: <span style="color:var(--accent-yellow)">'story'</span>, <span s
 
     const commands = {
         help: `Available Terminal Commands:
-  - story       : Background on current situation & academic goals
-  - budget      : Immediate 3-month living & degree completion budget ($2,546 USD)
-  - relocation  : EU visa, biometrics & relocation breakdown (€4,600+ EUR)
-  - bank        : Direct Arab Bank IBAN & wire transfer details
-  - tracker     : Live funding progress & accountability tracker
-  - services    : Link to professional practice hub (Psychotherapy, coaching, sound therapy)
-  - contact     : WhatsApp & email contact channels
+  - story       : Print background story & academic goals
+  - budget      : Print immediate survival budget ($2,546 USD)
+  - relocation  : Print EU relocation breakdown (€4,600+ EUR)
+  - bank        : Print Arab Bank transfer details
+  - tracker     : Print live funding progress & accountability tracker
+  - services    : Direct link to professional practice hub
   - clear       : Clear terminal screen`,
 
         story: `ABOUT & CURRENT SITUATION:
-- I am a Mental Health Practitioner, Educator, and M.Sc. Candidate in Psychology (Union Reg. #410981989).
-- I have 12 credit hours remaining until M.Sc. graduation (tuition fully covered).
-- Acute economic instability has disrupted basic living essentials (rent, utilities, grocery debt).
-- This campaign supports immediate basic survival, degree completion, and preparation for EU academic relocation.`,
+- Mental Health Practitioner, Educator, M.Sc. Candidate in Psychology (Union Reg. #410981989).
+- 12 Credit Hours remaining until graduation (tuition paid).
+- Seeking basic survival support ($2,546 USD) and relocation support (€4,600+ EUR).`,
 
-        services: `OFFERED PROFESSIONAL SERVICES (Practice Hub Link):
-To support my independent self-sustainability, you can book professional services or refer clients via my dedicated practice hub:
-🔗 https://hadiomarpsychology-cloud.github.io/my-hub/
+        services: `OFFERED PROFESSIONAL SERVICES:
+Visit my clean practice hub to book or refer services:
+🔗 https://hadiomarpsychology-cloud.github.io/my-hub/`,
 
-Services include:
-1. Trauma-informed Psychotherapy & Consultation
-2. Academic Coaching & Thesis Editing
-3. Therapeutic Sound & Grounding Sessions`,
+        budget: `IMMEDIATE 3-MONTH SURVIVAL BUDGET:
+Rent ($1,161) | Utilities ($135) | Food ($600) | Grocery Debt ($50) | Visa Prep ($300) | Buffer ($300)
+TOTAL: ~$2,546 USD`,
 
-        budget: `IMMEDIATE 3-MONTH SURVIVAL & COMPLETION BUDGET:
-+------------------------------------+----------------+------------------+
-| Expense Category                   | Monthly (USD)  | 3-Month Target   |
-+------------------------------------+----------------+------------------+
-| Housing Rent                       | $387           | $1,161           |
-| Electricity & Utilities            | $45            | $135             |
-| Groceries & Provisions             | $200           | $600             |
-| Local Grocery Debt Settlement      | $50 (One-time) | $50              |
-| Academic Relocation & Visa Prep    | $300           | $300             |
-| Emergency Buffer                   | $100           | $300             |
-+------------------------------------+----------------+------------------+
-| TOTAL IMMEDIATE TARGET             |                | ~$2,546 USD      |
-+------------------------------------+----------------+------------------+`,
+        relocation: `EU RELOCATION EXPENSE TARGET: €4,600 – €7,050 EUR`,
 
-        relocation: `EU VISA & INTERNATIONAL RELOCATION EXPENSE BREAKDOWN:
-
-Category                         Estimated Cost (Euro)   Notes
--------------------------------------------------------------------------------------------------
-Visa, Biometrics & Translations  €150 – €250             Includes degree translation & legalization.
-One-way Flight (Jordan/TLV-EU)   €250 – €500             Depends heavily on season & baggage.
-Temporary Stay (First 2 weeks)   €400 – €800             Airbnb or hostel while apartment hunting.
-Rental Deposit & 1st Month Rent  €1,800 – €3,000         Standard 2-month euro deposit requirement.
-Setting Up (Food, Sim, Bedding)  €500                    Essential furniture & local transport.
-Emergency Buffer                 €1,500 – €2,000         Safety net before first corporate paycheck.
--------------------------------------------------------------------------------------------------
-ESTIMATED TOTAL RELOCATION RANGE: €4,600 – €7,050`,
-
-        bank: `DIRECT BANK WIRE DETAILS (Arab Bank PLC):
-
-Account Holder Name : Hadi Hasan Mohammed-Saleh Omar
-Bank Name           : Arab Bank PLC
-Branch              : Ramallah / Nablus Branch
-Account SWIFT / BIC : [Insert Your SWIFT Code]
-IBAN Number         : [Insert Your PS... IBAN Number]
-
-* Note for senders: Please mark transfer notes as "Personal Gift", "Services", or "Living Support".`,
-
-        contact: `CONTACT CHANNELS:
-- Professional Work Hub: https://hadiomarpsychology-cloud.github.io/my-hub/
-- WhatsApp / Phone     : +970 56 990 3815
-- Email                : hadiomarpsychology@gmail.com`
+        bank: `ARAB BANK PLC WIRE DETAILS:
+Account Name : Hadi Hasan Mohammed-Saleh Omar
+Bank         : Arab Bank PLC
+Notes        : "Personal Gift" or "Living Support"`
     };
 
     function renderTracker() {
         const immPct = Math.min(100, Math.round((trackerData.immediateRaisedUSD / trackerData.immediateTargetUSD) * 100));
         const relPct = Math.min(100, Math.round((trackerData.relocationRaisedEUR / trackerData.relocationTargetEUR) * 100));
 
-        return `FUNDING PROGRESS & SOCIAL ACCOUNTABILITY TRACKER:
+        return `FUNDING PROGRESS TRACKER:
 
-1. Immediate Living & Completion Target ($2,546 USD):
+1. Immediate Survival Target ($2,546 USD):
 Raised: $${trackerData.immediateRaisedUSD} / $${trackerData.immediateTargetUSD} USD (${immPct}%)
 [${'='.repeat(Math.floor(immPct / 5))}${' '.repeat(20 - Math.floor(immPct / 5))}]
 
-2. EU Relocation & Visa Target (€4,600 EUR):
+2. EU Relocation Target (€4,600 EUR):
 Raised: €${trackerData.relocationRaisedEUR} / €${trackerData.relocationTargetEUR} EUR (${relPct}%)
-[${'='.repeat(Math.floor(relPct / 5))}${' '.repeat(20 - Math.floor(relPct / 5))}]
-
-* Note: Manually updated for full transparency.`;
+[${'='.repeat(Math.floor(relPct / 5))}${' '.repeat(20 - Math.floor(relPct / 5))}]`;
     }
 
     input.addEventListener('keydown', function (e) {
@@ -319,7 +333,7 @@ Raised: €${trackerData.relocationRaisedEUR} / €${trackerData.relocationTarge
             } else if (commands[cmd]) {
                 outputElement.textContent = commands[cmd];
             } else if (cmd !== '') {
-                outputElement.textContent = `Command not found: ${cmd}. Type 'help' for available commands.`;
+                outputElement.textContent = `Command not found: ${cmd}. Type 'help' for commands.`;
             }
 
             history.appendChild(outputElement);
