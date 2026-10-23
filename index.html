@@ -3,343 +3,652 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hadi Omar | Academic Completion & Relocation Support Hub</title>
+    <title>Hadi Omar | Academic Completion & Emergency Support</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --border-color: #30363d;
-            --text-main: #c9d1d9;
-            --text-muted: #8b949e;
-            --accent-blue: #58a6ff;
-            --accent-green: #3fb950;
-            --accent-yellow: #d29922;
+            --bg: #090d16;
+            --surface: #111827;
+            --surface-card: #1f293d;
+            --border: #2d3748;
+            --border-accent: rgba(99, 102, 241, 0.3);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --emerald: #10b981;
+            --emerald-bg: rgba(16, 185, 129, 0.1);
+            --amber: #f59e0b;
+            --amber-bg: rgba(245, 158, 11, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Fira Code', 'Courier New', Courier, monospace;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 920px;
-        }
-
-        .banner {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .banner h1 {
-            margin: 0 0 10px 0;
-            color: var(--accent-blue);
-            font-size: 1.4rem;
-        }
-
-        .banner p {
-            margin: 5px 0;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .cta-buttons {
-            margin-top: 15px;
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            line-height: 1.6;
+            padding: 40px 20px;
             display: flex;
             justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
         }
 
-        .btn {
-            background-color: #21262d;
-            border: 1px solid var(--border-color);
-            color: var(--accent-blue);
-            padding: 8px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: background 0.2s;
-        }
-
-        .btn:hover { background-color: #30363d; }
-
-        .btn-primary {
-            background-color: var(--accent-green);
-            color: #000;
-            font-weight: bold;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--accent-green);
-            filter: brightness(0.9);
-        }
-
-        .terminal-window {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+        .wrapper {
             width: 100%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 860px;
+        }
+
+        /* Top Header Navigation / Action Bar */
+        .top-bar {
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .brand {
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-badge {
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.72rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Hero Card */
+        .hero-card {
+            background: linear-gradient(135deg, rgba(31, 41, 61, 0.9) 0%, rgba(17, 24, 39, 0.95) 100%);
+            border: 1px solid var(--border-accent);
+            border-radius: 24px;
+            padding: 36px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
             overflow: hidden;
         }
 
-        .terminal-header {
-            background-color: #21262d;
-            padding: 10px 15px;
-            display: flex;
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--emerald), var(--amber));
+        }
+
+        .tag {
+            display: inline-flex;
             align-items: center;
-            border-bottom: 1px solid var(--border-color);
+            gap: 6px;
+            background: var(--amber-bg);
+            color: var(--amber);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 30px;
+            margin-bottom: 16px;
         }
 
-        .buttons { display: flex; gap: 8px; }
-        .dot { width: 12px; height: 12px; border-radius: 50%; }
-        .red { background-color: #ff5f56; }
-        .yellow { background-color: #ffbd2e; }
-        .green { background-color: #27c93f; }
-
-        .title {
-            color: var(--text-muted);
-            font-size: 13px;
-            margin-left: auto;
-            margin-right: auto;
+        h1 {
+            font-size: 2.1rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 12px;
+            letter-spacing: -0.03em;
+            color: #ffffff;
         }
 
-        .terminal-body {
-            padding: 20px;
-            max-height: 75vh;
-            overflow-y: auto;
-            line-height: 1.6;
+        .subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 720px;
         }
 
-        .prompt-line { display: flex; margin-top: 10px; }
-        .prompt { color: var(--accent-green); font-weight: bold; }
-        .path { color: var(--accent-blue); }
-        .command { color: #ffffff; margin-left: 8px; }
-
-        .output {
-            color: var(--text-main);
-            white-space: pre-wrap;
-            margin-bottom: 15px;
-        }
-
-        .input-line {
-            display: flex;
+        /* Buttons */
+        .btn {
+            display: inline-flex;
             align-items: center;
-            margin-top: 10px;
-        }
-
-        input[type="text"] {
-            background: transparent;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 22px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
             border: none;
+        }
+
+        .btn-work {
+            background: var(--emerald);
+            color: #0d1117;
+            font-weight: 700;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-work:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+            background: #059669;
             color: #fff;
-            font-family: inherit;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--text-secondary);
+        }
+
+        /* Main Section Cards */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #fff;
+        }
+
+        p {
+            color: var(--text-secondary);
             font-size: 1rem;
-            outline: none;
+            margin-bottom: 16px;
+        }
+
+        p strong { color: var(--text-primary); }
+
+        /* Tables */
+        .budget-table {
             width: 100%;
-            margin-left: 8px;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .budget-table th, .budget-table td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .budget-table th {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .budget-table td {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .budget-table tr:last-child td {
+            border-bottom: none;
+            background: rgba(99, 102, 241, 0.05);
+            font-weight: 700;
+        }
+
+        /* Bank Box */
+        .bank-card {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(17, 24, 39, 0.8) 100%);
+            border: 1px dashed rgba(245, 158, 11, 0.4);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 12px;
+        }
+
+        .bank-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.95rem;
+        }
+
+        .bank-row:last-child { border-bottom: none; }
+        .bank-label { color: var(--text-secondary); }
+        .bank-value { color: #fff; font-family: monospace; font-weight: 600; }
+
+        /* Services Promotion Highlight Box */
+        .hire-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(17, 24, 39, 0.9) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Interactive Tracker Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: var(--surface);
+            border: 1px solid var(--border-accent);
+            border-radius: 24px;
+            padding: 32px;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            animation: modalFadeIn 0.25s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover { color: #fff; background: rgba(255, 255, 255, 0.15); }
+
+        .progress-group {
+            margin-top: 20px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .progress-bg {
+            background: rgba(255, 255, 255, 0.08);
+            height: 12px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--emerald));
+            border-radius: 10px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="banner">
-        <h1>Hadi Omar | Emergency Support & Master's Degree Fundraiser</h1>
-        <p>Mental Health Practitioner & M.Sc. Candidate in Psychology (Union Reg. #410981989)</p>
-        <p>Dedicated fundraiser portal. Looking to hire professional services instead?</p>
-        
-        <div class="cta-buttons">
-            <a href="https://hadiomarpsychology-cloud.github.io/my-hub/" target="_blank" class="btn btn-primary">🔗 Official Practice Hub (Hire / Book Services)</a>
-            <a href="https://wa.me/970569903815" target="_blank" class="btn">💬 WhatsApp (+970 56 990 3815)</a>
+<div class="wrapper">
+
+    <!-- Top Navigation Bar -->
+    <div class="top-bar">
+        <div class="brand">
+            Hadi Omar <span class="brand-badge">Support Portal</span>
+        </div>
+        <div class="top-actions">
+            <button class="btn btn-secondary" onclick="openTrackerModal()">📊 Live Tracker</button>
+            <a href="https://wa.me/970569903815" target="_blank" class="btn btn-secondary">💬 WhatsApp</a>
         </div>
     </div>
 
-    <div class="terminal-window">
-        <div class="terminal-header">
-            <div class="buttons">
-                <div class="dot red"></div>
-                <div class="dot yellow"></div>
-                <div class="dot green"></div>
+    <!-- Hero Header -->
+    <div class="hero-card">
+        <div class="tag">🎓 M.Sc. Candidate & Practitioner (Union Reg. #410981989)</div>
+        <h1>Academic Completion & Relocation Emergency Fund</h1>
+        <p class="subtitle">
+            Providing transparent support for basic living stability, completing my final 12 M.Sc. credit hours, and preparing for EU academic relocation.
+        </p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="https://hadiomarpsychology-cloud.github.io/my-hub/" target="_blank" class="btn btn-work">
+                🔗 Hire Professional Services (Practice Hub)
+            </a>
+            <button class="btn btn-secondary" onclick="openTrackerModal()">
+                📊 Funding Progress & Accountability
+            </button>
+        </div>
+    </div>
+
+    <!-- Professional Services Callout Card -->
+    <div class="hire-box">
+        <div>
+            <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 6px;">Looking to Hire or Book Consultations?</h3>
+            <p style="margin-bottom: 0; font-size: 0.92rem;">
+                Support my professional independence directly by booking psychotherapy, academic coaching, or sound therapy on my clean practice hub.
+            </p>
+        </div>
+        <a href="https://hadiomarpsychology-cloud.github.io/my-hub/" target="_blank" class="btn btn-work" style="white-space: nowrap;">
+            Visit Practice Hub →
+        </a>
+    </div>
+
+    <!-- Background & Story Card -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-icon">📖</div>
+            <h2>Background & Current Situation</h2>
+        </div>
+        <p>
+            I am a Mental Health Practitioner, Educator, and Master’s student in Psychology with <strong>12 credit hours remaining until graduation</strong>. While my academic tuition is fully covered, acute regional economic crises have severely disrupted my basic living stability.
+        </p>
+        <p>
+            This campaign exists to fulfill immediate basic survival necessities—housing rent, utilities, and grocery debt—while allowing me to finish my thesis and transition toward international academic opportunities in Europe.
+        </p>
+    </div>
+
+    <!-- Immediate 3-Month Living Budget -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-icon">💡</div>
+            <h2>Immediate 3-Month Living Budget (~$2,546 USD)</h2>
+        </div>
+        <p>A transparent breakdown of basic living costs to ensure stability while completing my Master's degree:</p>
+        
+        <table class="budget-table">
+            <thead>
+                <tr>
+                    <th>Expense Category</th>
+                    <th>Monthly Target</th>
+                    <th>3-Month Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Housing Rent</td>
+                    <td>$387</td>
+                    <td>$1,161</td>
+                </tr>
+                <tr>
+                    <td>Electricity & Essential Utilities</td>
+                    <td>$45</td>
+                    <td>$135</td>
+                </tr>
+                <tr>
+                    <td>Groceries & Food Provisions</td>
+                    <td>$200</td>
+                    <td>$600</td>
+                </tr>
+                <tr>
+                    <td>Local Grocery Debt Settlement</td>
+                    <td>One-time</td>
+                    <td>$50</td>
+                </tr>
+                <tr>
+                    <td>Academic Relocation & Visa Admin Prep</td>
+                    <td>One-time</td>
+                    <td>$300</td>
+                </tr>
+                <tr>
+                    <td>Emergency Survival Reserve</td>
+                    <td>$100</td>
+                    <td>$300</td>
+                </tr>
+                <tr>
+                    <td><strong>TOTAL SURVIVAL TARGET</strong></td>
+                    <td></td>
+                    <td><strong>~$2,546 USD</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- EU Relocation Target Card -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-icon">✈️</div>
+            <h2>EU Visa & Relocation Budget (€4,600 – €7,050 EUR)</h2>
+        </div>
+        <p>Required budget range for visa processing, legalization, flight, temporary lodging, and initial rental security deposit in Europe:</p>
+
+        <table class="budget-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Estimated Cost</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Visa, Biometrics & Translations</td>
+                    <td>€150 – €250</td>
+                    <td>Degree legalization & translations</td>
+                </tr>
+                <tr>
+                    <td>One-Way Flight</td>
+                    <td>€250 – €500</td>
+                    <td>Regional transit & flight</td>
+                </tr>
+                <tr>
+                    <td>Temporary Stay (First 2 Weeks)</td>
+                    <td>€400 – €800</td>
+                    <td>Initial lodging while apartment hunting</td>
+                </tr>
+                <tr>
+                    <td>Rental Deposit & 1st Month Rent</td>
+                    <td>€1,800 – €3,000</td>
+                    <td>Standard 2-month rental deposit</td>
+                </tr>
+                <tr>
+                    <td>Setting Up Essentials</td>
+                    <td>€500</td>
+                    <td>Bedding, local SIM, transit pass</td>
+                </tr>
+                <tr>
+                    <td>Emergency Safety Net</td>
+                    <td>€1,500 – €2,000</td>
+                    <td>Buffer before first academic stipend</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Direct Bank Wire Transfer Card -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-icon">🏛️</div>
+            <h2>Direct Wire Transfer Details</h2>
+        </div>
+        <p>For direct bank transfers via Arab Bank PLC:</p>
+
+        <div class="bank-card">
+            <div class="bank-row">
+                <span class="bank-label">Account Holder Name</span>
+                <span class="bank-value">Hadi Hasan Mohammed-Saleh Omar</span>
             </div>
-            <div class="title">hadiomar@fundraiser-hub:~</div>
+            <div class="bank-row">
+                <span class="bank-label">Bank Name</span>
+                <span class="bank-value">Arab Bank PLC</span>
+            </div>
+            <div class="bank-row">
+                <span class="bank-label">Branch</span>
+                <span class="bank-value">Ramallah / Nablus Branch</span>
+            </div>
+            <div class="bank-row">
+                <span class="bank-label">SWIFT / BIC Code</span>
+                <span class="bank-value">[Insert SWIFT Code]</span>
+            </div>
+            <div class="bank-row">
+                <span class="bank-label">IBAN Number</span>
+                <span class="bank-value">[Insert PS... IBAN]</span>
+            </div>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--amber); margin-top: 12px; margin-bottom: 0;">
+            * Senders: Please add reference note as <strong>"Personal Gift"</strong> or <strong>"Living Support"</strong> for clear bank processing.
+        </p>
+    </div>
+
+</div>
+
+<!-- Interactive Tracker Popup Modal -->
+<div class="modal-overlay" id="trackerModal" onclick="closeTrackerModalOnOuterClick(event)">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeTrackerModal()">✕</button>
+        
+        <div class="card-header" style="margin-bottom: 12px;">
+            <div class="card-icon">📊</div>
+            <h2>Live Transparency Tracker</h2>
+        </div>
+        <p style="font-size: 0.9rem;">Real-time progress toward survival and relocation targets:</p>
+
+        <div class="progress-group">
+            <div class="progress-header">
+                <span>1. Immediate Living Target ($2,546 USD)</span>
+                <span id="usdText" style="color: var(--emerald);">$0 / $2,546</span>
+            </div>
+            <div class="progress-bg">
+                <div class="progress-fill" id="usdBar" style="width: 0%;"></div>
+            </div>
         </div>
 
-        <div class="terminal-body" id="terminal-body">
-            <div class="output">
-================================================================================
-HADI OMAR | EMERGENCY SURVIVAL, THESIS COMPLETION & RELOCATION FUND
-================================================================================
-
-[1. BACKGROUND & SITUATION]
-I am a Mental Health Practitioner, Educator, and M.Sc. Candidate in Psychology 
-(Union Reg. #410981989) with 12 credit hours remaining until graduation. 
-
-While my academic tuition is fully covered, severe regional economic instability 
-and acute disruptions have depleted basic living resources. This campaign exists 
-to cover immediate basic survival (housing rent, utility costs, grocery debt) 
-while enabling me to complete my thesis work and transition toward international 
-academic relocation in Europe.
-
---------------------------------------------------------------------------------
-
-[2. IMMEDIATE 3-MONTH SURVIVAL BUDGET ($2,546 USD TARGET)]
-+------------------------------------+----------------+------------------+
-| Expense Category                   | Monthly (USD)  | 3-Month Target   |
-+------------------------------------+----------------+------------------+
-| Housing Rent                       | $387           | $1,161           |
-| Electricity & Essential Utilities  | $45            | $135             |
-| Groceries & Provisions             | $200           | $600             |
-| Local Debt Settlement (Groceries)  | $50 (One-time) | $50              |
-| Academic Relocation & Visa Prep    | $300           | $300             |
-| Emergency Buffer                   | $100           | $300             |
-+------------------------------------+----------------+------------------+
-| TOTAL IMMEDIATE SURVIVAL TARGET    |                | ~$2,546 USD      |
-+------------------------------------+----------------+------------------+
-
---------------------------------------------------------------------------------
-
-[3. EU VISA & INTERNATIONAL RELOCATION BUDGET (€4,600 – €7,050 EUR)]
-Category                         Estimated Cost (Euro)   Notes
--------------------------------------------------------------------------------------------------
-Visa, Biometrics & Translations  €150 – €250             Includes degree translation & legalization.
-One-way Flight (Jordan/TLV-EU)   €250 – €500             Depends on travel season.
-Temporary Stay (First 2 weeks)   €400 – €800             Initial lodging while apartment hunting.
-Rental Deposit & 1st Month Rent  €1,800 – €3,000         Standard 2-month deposit requirement.
-Setting Up (Food, Sim, Bedding)  €500                    Essential furniture & local transit.
-Emergency Safety Net             €1,500 – €2,000         Safety buffer prior to stipend/paycheck.
--------------------------------------------------------------------------------------------------
-ESTIMATED TOTAL RELOCATION RANGE: €4,600 – €7,050 EUR
-
---------------------------------------------------------------------------------
-
-[4. DIRECT BANK TRANSFER DETAILS]
-Bank Name           : Arab Bank PLC
-Account Holder Name : Hadi Hasan Mohammed-Saleh Omar
-Branch              : Ramallah / Nablus Branch
-SWIFT / BIC         : [Insert Your SWIFT Code]
-IBAN Number         : [Insert Your PS... IBAN Number]
-
-* Note: Please mark transfer notes as "Personal Gift" or "Living Support".
-
---------------------------------------------------------------------------------
-
-[5. HIRE MY PROFESSIONAL SERVICES]
-If you prefer to support through work, you can hire me for online psychotherapy, 
-academic coaching, sound therapy, or research consultations via my clean hub:
-🔗 https://hadiomarpsychology-cloud.github.io/my-hub/
-
-================================================================================
-Type <span style="color:var(--accent-yellow)">'help'</span> for shortcut commands or <span style="color:var(--accent-yellow)">'tracker'</span> for live funding progress.
+        <div class="progress-group" style="margin-top: 24px;">
+            <div class="progress-header">
+                <span>2. EU Relocation Target (€4,600 EUR)</span>
+                <span id="eurText" style="color: var(--primary);">€0 / €4,600</span>
             </div>
-
-            <div id="history"></div>
-
-            <div class="input-line">
-                <span class="prompt">hadiomar@support</span>:<span class="path">~</span>$
-                <input type="text" id="command-input" autofocus autocomplete="off">
+            <div class="progress-bg">
+                <div class="progress-fill" id="eurBar" style="width: 0%;"></div>
             </div>
+        </div>
+
+        <div style="margin-top: 28px; text-align: center;">
+            <button class="btn btn-secondary" onclick="closeTrackerModal()" style="width: 100%;">Close Tracker</button>
         </div>
     </div>
 </div>
 
 <script>
-    const input = document.getElementById('command-input');
-    const history = document.getElementById('history');
-    const terminalBody = document.getElementById('terminal-body');
+    // Configurable raised figures - update these numbers anytime
+    const raisedUSD = 0;
+    const targetUSD = 2546;
 
-    const trackerData = {
-        immediateTargetUSD: 2546,
-        immediateRaisedUSD: 0,
-        relocationTargetEUR: 4600,
-        relocationRaisedEUR: 0
-    };
+    const raisedEUR = 0;
+    const targetEUR = 4600;
 
-    const commands = {
-        help: `Available Terminal Commands:
-  - story       : Print background story & academic goals
-  - budget      : Print immediate survival budget ($2,546 USD)
-  - relocation  : Print EU relocation breakdown (€4,600+ EUR)
-  - bank        : Print Arab Bank transfer details
-  - tracker     : Print live funding progress & accountability tracker
-  - services    : Direct link to professional practice hub
-  - clear       : Clear terminal screen`,
+    function openTrackerModal() {
+        const modal = document.getElementById('trackerModal');
+        modal.style.display = 'flex';
 
-        story: `ABOUT & CURRENT SITUATION:
-- Mental Health Practitioner, Educator, M.Sc. Candidate in Psychology (Union Reg. #410981989).
-- 12 Credit Hours remaining until graduation (tuition paid).
-- Seeking basic survival support ($2,546 USD) and relocation support (€4,600+ EUR).`,
+        // Calculate percentages
+        const pctUSD = Math.min(100, Math.round((raisedUSD / targetUSD) * 100));
+        const pctEUR = Math.min(100, Math.round((raisedEUR / targetEUR) * 100));
 
-        services: `OFFERED PROFESSIONAL SERVICES:
-Visit my clean practice hub to book or refer services:
-🔗 https://hadiomarpsychology-cloud.github.io/my-hub/`,
+        // Update UI dynamically
+        document.getElementById('usdText').innerText = `$${raisedUSD.toLocaleString()} / $${targetUSD.toLocaleString()} USD (${pctUSD}%)`;
+        document.getElementById('usdBar').style.width = pctUSD + '%';
 
-        budget: `IMMEDIATE 3-MONTH SURVIVAL BUDGET:
-Rent ($1,161) | Utilities ($135) | Food ($600) | Grocery Debt ($50) | Visa Prep ($300) | Buffer ($300)
-TOTAL: ~$2,546 USD`,
-
-        relocation: `EU RELOCATION EXPENSE TARGET: €4,600 – €7,050 EUR`,
-
-        bank: `ARAB BANK PLC WIRE DETAILS:
-Account Name : Hadi Hasan Mohammed-Saleh Omar
-Bank         : Arab Bank PLC
-Notes        : "Personal Gift" or "Living Support"`
-    };
-
-    function renderTracker() {
-        const immPct = Math.min(100, Math.round((trackerData.immediateRaisedUSD / trackerData.immediateTargetUSD) * 100));
-        const relPct = Math.min(100, Math.round((trackerData.relocationRaisedEUR / trackerData.relocationTargetEUR) * 100));
-
-        return `FUNDING PROGRESS TRACKER:
-
-1. Immediate Survival Target ($2,546 USD):
-Raised: $${trackerData.immediateRaisedUSD} / $${trackerData.immediateTargetUSD} USD (${immPct}%)
-[${'='.repeat(Math.floor(immPct / 5))}${' '.repeat(20 - Math.floor(immPct / 5))}]
-
-2. EU Relocation Target (€4,600 EUR):
-Raised: €${trackerData.relocationRaisedEUR} / €${trackerData.relocationTargetEUR} EUR (${relPct}%)
-[${'='.repeat(Math.floor(relPct / 5))}${' '.repeat(20 - Math.floor(relPct / 5))}]`;
+        document.getElementById('eurText').innerText = `€${raisedEUR.toLocaleString()} / €${targetEUR.toLocaleString()} EUR (${pctEUR}%)`;
+        document.getElementById('eurBar').style.width = pctEUR + '%';
     }
 
-    input.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-            const cmd = input.value.trim().toLowerCase();
-            input.value = '';
+    function closeTrackerModal() {
+        document.getElementById('trackerModal').style.display = 'none';
+    }
 
-            const promptElement = document.createElement('div');
-            promptElement.className = 'prompt-line';
-            promptElement.innerHTML = `<span class="prompt">hadiomar@support</span>:<span class="path">~</span>$ <span class="command">${cmd}</span>`;
-            history.appendChild(promptElement);
-
-            const outputElement = document.createElement('div');
-            outputElement.className = 'output';
-
-            if (cmd === 'clear') {
-                history.innerHTML = '';
-                return;
-            } else if (cmd === 'tracker') {
-                outputElement.textContent = renderTracker();
-            } else if (commands[cmd]) {
-                outputElement.textContent = commands[cmd];
-            } else if (cmd !== '') {
-                outputElement.textContent = `Command not found: ${cmd}. Type 'help' for commands.`;
-            }
-
-            history.appendChild(outputElement);
-            terminalBody.scrollTop = terminalBody.scrollHeight;
+    function closeTrackerModalOnOuterClick(e) {
+        if (e.target.id === 'trackerModal') {
+            closeTrackerModal();
         }
-    });
+    }
 </script>
 
 </body>
