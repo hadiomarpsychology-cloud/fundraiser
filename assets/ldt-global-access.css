@@ -44,3 +44,15 @@
 .ldt-one-menu .ldt-global-country:focus-visible{outline:3px solid #e97824}
 .ldt-one-menu #ldt-close{max-width:170px}
 @media(max-width:630px){.ldt-one-menu .ldt-global-langs{grid-template-columns:1fr 1fr}.ldt-one-menu .ldt-global-panel{max-height:80vh}}
+
+/* One combined country-and-language choice per button */
+.ldt-global-grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));align-items:stretch}
+.ldt-country-language-option{display:flex;gap:12px;align-items:center;text-align:start;min-height:72px;width:100%;padding:12px 14px;background:#fff;border:1px solid #e5c6a7;border-radius:10px;font:inherit;color:#24170f;cursor:pointer}
+.ldt-country-language-option:hover{border-color:#e97824;background:#fff2e1}
+.ldt-country-language-option:focus-visible{outline:3px solid #e97824;outline-offset:2px}
+.ldt-option-flag{font-size:28px;flex:none}
+.ldt-option-details{display:flex;flex-direction:column;gap:3px;min-width:0;line-height:1.4}
+.ldt-option-details strong{font-size:14px;overflow-wrap:anywhere}
+.ldt-option-details>span{font-size:13px;color:#80512e;overflow-wrap:anywhere}
+.ldt-country-language-option.ldt-untranslated{border-style:dashed}
+@media(max-width:550px){.ldt-global-grid{grid-template-columns:1fr}}
