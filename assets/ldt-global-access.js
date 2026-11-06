@@ -34,23 +34,18 @@ function render(){
  const q=search.value.trim().toLocaleLowerCase();
  const found=countries.filter(c=>(c.a+" "+c.n+" "+c.c+" "+languageOptions(c).map(langName).join(" ")).toLocaleLowerCase().includes(q));
  status.textContent=found.length+" / 193";
- grid.replaceChildren(...found.map(c=>{
-  const card=document.createElement("article");card.className="ldt-global-country-card";card.setAttribute("role","list");
-  const heading=document.createElement("h3");heading.className="ldt-country-heading";
-  const flagNode=document.createElement("span");flagNode.textContent=flag(c.c);flagNode.setAttribute("aria-hidden","true");
-  const countryName=document.createElement("span");countryName.textContent=c.a+" · "+c.n;
-  heading.append(flagNode,countryName);card.append(heading);
-  const buttons=document.createElement("div");buttons.className="ldt-country-languages";
-  for(const code of languageOptions(c)){
-   const b=document.createElement("button");b.type="button";b.className="ldt-country-language";
-   const available=translated.has(code);b.textContent=langName(code)+(available?" ✓":"");
-   b.setAttribute("aria-label",c.n+": "+langName(code)+(available?" — website translation available":" — translation not available"));
-   b.title=available?"الترجمة متاحة · Translation available":"الترجمة غير منشورة · Translation not available";
-   if(!available)b.classList.add("ldt-untranslated");
-   b.addEventListener("click",()=>selectLanguage(c,code));buttons.append(b);
-  }
-  card.append(buttons);return card;
- }));
+ grid.replaceChildren(...found.flatMap(c=>languageOptions(c).map(code=>{
+  const b=document.createElement("button");b.type="button";b.className="ldt-country-language-option";
+  const available=translated.has(code);
+  if(!available)b.classList.add("ldt-untranslated");
+  const f=document.createElement("span");f.textContent=flag(c.c);f.className="ldt-option-flag";f.setAttribute("aria-hidden","true");
+  const content=document.createElement("span");content.className="ldt-option-details";
+  const country=document.createElement("strong");country.textContent=c.a+" · "+c.n;
+  const language=document.createElement("span");language.textContent=langName(code)+(available?" ✓":" · ترجمة غير متاحة");
+  content.append(country,language);b.append(f,content);
+  b.setAttribute("aria-label",c.n+" — "+langName(code)+(available?"":" — translation not yet available"));
+  b.addEventListener("click",()=>selectLanguage(c,code));return b;
+ })));
 }
 function toggle(open){panel.hidden=!open;trigger.setAttribute("aria-expanded",String(open));if(open)search.focus();else trigger.focus();}
 trigger.addEventListener("click",()=>toggle(panel.hidden));
