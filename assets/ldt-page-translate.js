@@ -82,6 +82,27 @@ async function start(code){
    }
   }
   await Promise.all(Array.from({length:3},worker));
+  // Include accessible labels, headings in the browser title, image alt text and placeholders.
+  const attributes=[];
+  for(const el of document.querySelectorAll("[title],[alt],[placeholder],[aria-label]")){
+   if(el.closest(ignore)||el.matches("input[type=password],input[type=hidden]"))continue;
+   if(!originalAttrs.has(el))originalAttrs.set(el,new Map());
+   const saved=originalAttrs.get(el);
+   for(const name of ["title","alt","placeholder","aria-label"]){
+    if(!el.hasAttribute(name))continue;
+    if(!saved.has(name))saved.set(name,el.getAttribute(name));
+    const value=saved.get(name);
+    if(value&&/\\p{L}/u.test(value))attributes.push({el,name,value,from:source(value,{parentElement:el})});
+   }
+  }
+  for(const item of attributes){
+   try{
+    const text=await translateValue(item.value,item.from,target,sessions[item.from]);
+    if(token!==requestId)return false;
+    if(item.el.isConnected)item.el.setAttribute(item.name,text);
+   }catch(e){failed++;}
+  }
+
   translating=false;
   if(token!==requestId)return false;
   if(failed)status("Translated "+completed+" text sections. "+failed+" sections remain in the original language.");
