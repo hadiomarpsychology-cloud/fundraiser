@@ -8,8 +8,8 @@ const ignore="script,style,noscript,svg,canvas,code,[contenteditable],.ldt-globa
 function normal(code){if(code==="en-GB")return "en";if(code==="zh-CN")return "zh";if(code==="zh-TW")return "zh-Hant";return code;}
 function source(text,node){
  const owner=node.parentElement, lang=owner?.closest("[lang]")?.getAttribute("lang");
- if(lang==="ar")return "ar";
  if(lang==="en")return "en";
+ if(lang==="ar"&&/[\u0600-\u06ff]/.test(text))return "ar";
  const arabic=(text.match(/[\u0600-\u06ff]/g)||[]).length;
  const latin=(text.match(/[A-Za-z]/g)||[]).length;
  return arabic>latin?"ar":"en";
@@ -92,7 +92,7 @@ async function start(code){
     if(!el.hasAttribute(name))continue;
     if(!saved.has(name))saved.set(name,el.getAttribute(name));
     const value=saved.get(name);
-    if(value&&/\\p{L}/u.test(value))attributes.push({el,name,value,from:source(value,{parentElement:el})});
+    if(value&&/[A-Za-z\u0600-\u06ff]/.test(value))attributes.push({el,name,value,from:source(value,{parentElement:el})});
    }
   }
   for(const item of attributes){
