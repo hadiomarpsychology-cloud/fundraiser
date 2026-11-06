@@ -2,55 +2,60 @@
 "use strict";
 const countries=Array.isArray(window.LDT_COUNTRIES)?window.LDT_COUNTRIES:[];
 if(countries.length!==193)return;
-const supported=new Set(["ar","fa","ckb","he","en-GB"]);
+const translated=new Set(["ar","fa","ckb","he","en","en-GB"]);
 const names={"ar":"العربية","fa":"فارسی","ckb":"کوردی سۆرانی","he":"עברית","en-GB":"English (UK)","en":"English","fr":"Français","es":"Español","de":"Deutsch","pt":"Português","it":"Italiano","zh-CN":"中文","ja":"日本語","ko":"한국어","hi":"हिन्दी","ru":"Русский","tr":"Türkçe","ur":"اردو","bn":"বাংলা","nl":"Nederlands","sw":"Kiswahili","am":"አማርኛ","vi":"Tiếng Việt","id":"Bahasa Indonesia","ms":"Bahasa Melayu","dz":"རྫོང་ཁ","rn":"Kirundi","ss":"siSwati","st":"Sesotho","bi":"Bislama","dv":"ދިވެހި","tl":"Filipino","si":"සිංහල","hy":"Հայերեն","az":"Azərbaycanca","sq":"Shqip","ca":"Català","sr":"Српски","hr":"Hrvatski","bg":"Български","cs":"Čeština","da":"Dansk","et":"Eesti","ti":"ትግርኛ","fi":"Suomi","ka":"ქართული","hu":"Magyar","is":"Íslenska","ga":"Gaeilge","kk":"Қазақша","ky":"Кыргызча","lo":"ລາວ","lv":"Latviešu","lt":"Lietuvių","lb":"Lëtzebuergesch","mt":"Malti","mn":"Монгол","my":"မြန်မာ","ne":"नेपाली","mk":"Македонски","no":"Norsk","pl":"Polski","ro":"Română","rw":"Kinyarwanda","sm":"Gagana Sāmoa","sk":"Slovenčina","sl":"Slovenščina","sv":"Svenska","th":"ไทย","to":"Lea faka-Tonga","tk":"Türkmençe","uk":"Українська","uz":"Oʻzbekcha","af":"Afrikaans","he":"עברית","el":"Ελληνικά","fa":"فارسی"};
-const bar=document.createElement("section");bar.className="ldt-global ldt-one-menu";bar.setAttribute("aria-label","دليل الدول واللغات / Country and language directory");
-bar.innerHTML='<div class="ldt-global-line"><span class="ldt-global-mark" aria-hidden="true">◉</span><span class="ldt-global-title">إل دي تي · وصول عالمي</span><button class="ldt-global-trigger" type="button" aria-expanded="false" aria-controls="ldt-country-panel">🌐 اختر الدولة · Choose country ▾</button></div><div class="ldt-global-panel" id="ldt-country-panel" hidden><div class="ldt-global-inner"><label for="ldt-country-search">ابحث عن الدولة / Search country</label><input id="ldt-country-search" class="ldt-global-search" type="search" placeholder="Country · الدولة" autocomplete="off"><p id="ldt-country-result" role="status"></p><div class="ldt-global-grid" id="ldt-country-grid" role="group" aria-label="193 countries"></div><div id="ldt-country-selection" class="ldt-global-choice" role="status" hidden></div><p class="ldt-global-note">كل دولة مرتبطة بلغة رئيسية للعرض. الترجمات المنشورة للموقع محدودة؛ اختيار لغة أخرى لا يترجم النصوص أو الوثائق تلقائيًا. لا توجد تحويلات إلى جوجل.</p><button class="ldt-global-lang" id="ldt-close" type="button">إغلاق · Close</button></div></div>';
+
+const bar=document.createElement("section");
+bar.className="ldt-global ldt-one-menu";
+bar.setAttribute("aria-label","Country languages / لغات الدول");
+bar.innerHTML='<div class="ldt-global-line"><span class="ldt-global-mark" aria-hidden="true">◉</span><span class="ldt-global-title">إل دي تي · وصول عالمي</span><button class="ldt-global-trigger" type="button" aria-expanded="false" aria-controls="ldt-country-panel">🌐 الدول واللغات · Countries & languages ▾</button></div><div id="ldt-country-panel" class="ldt-global-panel" hidden><div class="ldt-global-inner"><label for="ldt-country-search">ابحث عن دولة أو لغة / Search country or language</label><input id="ldt-country-search" class="ldt-global-search" type="search" placeholder="الدولة أو اللغة · Country or language" autocomplete="off"><p id="ldt-country-result" role="status"></p><div id="ldt-country-grid" class="ldt-global-grid" role="list" aria-label="Languages by country"></div><p id="ldt-language-feedback" class="ldt-global-note" role="status" aria-live="polite">اللغات المتاحة للموقع تُطبّق فورًا. اللغات الأخرى مُدرجة للتعرّف عليها، لكن لا توجد لها ترجمة منشورة بعد. لا يوجد تحويل إلى خدمة ترجمة خارجية.</p><button class="ldt-global-lang" id="ldt-close" type="button">إغلاق · Close</button></div></div>';
 document.body.insertBefore(bar,document.body.firstChild);
-const trigger=bar.querySelector(".ldt-global-trigger"),panel=bar.querySelector("#ldt-country-panel"),search=bar.querySelector("#ldt-country-search"),grid=bar.querySelector("#ldt-country-grid"),status=bar.querySelector("#ldt-country-result"),selected=bar.querySelector("#ldt-country-selection");
-function flag(code){return [...code.toUpperCase()].map(c=>String.fromCodePoint(127397+c.charCodeAt(0))).join("");}
+const trigger=bar.querySelector(".ldt-global-trigger"),panel=bar.querySelector("#ldt-country-panel"),search=bar.querySelector("#ldt-country-search"),grid=bar.querySelector("#ldt-country-grid"),status=bar.querySelector("#ldt-country-result"),feedback=bar.querySelector("#ldt-language-feedback");
+function flag(code){return [...code.toUpperCase()].map(x=>String.fromCodePoint(127397+x.charCodeAt(0))).join("");}
 function langName(code){if(names[code])return names[code];try{return new Intl.DisplayNames(["en"],{type:"language"}).of(code)||code;}catch(e){return code;}}
-function persist(country){try{localStorage.setItem("ldt-country",country.c);localStorage.setItem("ldt-global-language",country.p);}catch(e){}}
-function apply(country,remember){
- if(!country)return;
- const code=country.p;
- if(remember)persist(country);
- selected.hidden=false;
- selected.replaceChildren();
- const heading=document.createElement("strong");heading.textContent=flag(country.c)+" "+country.a+" — "+country.n;
- const line=document.createElement("p");line.style.margin="7px 0";line.textContent="اللغة الرئيسية / Primary language: "+langName(code);
- const note=document.createElement("p");note.className="ldt-global-note";
- if(supported.has(code)||code==="en"){
+function languageOptions(country){return [...new Set([country.p,...(Array.isArray(country.l)?country.l:[])].filter(Boolean))];}
+function selectLanguage(country,code){
+ const language=langName(code);
+ try{localStorage.setItem("ldt-country",country.c);}catch(e){}
+ if(translated.has(code)){
   const actual=code==="en"?"en-GB":code;
+  try{localStorage.setItem("ldt-global-language",actual);}catch(e){}
   window.dispatchEvent(new CustomEvent("ldt-language-change",{detail:actual}));
   document.documentElement.lang=actual;
   document.documentElement.dir=actual==="en-GB"?"ltr":"rtl";
-  note.textContent="تم اختيار اللغة المتاحة لواجهة الموقع. المستندات الأصلية كما هي.";
+  trigger.textContent="🌐 "+flag(country.c)+" "+language+" ▾";
+  feedback.textContent="تم اختيار "+language+" للصفحات التي تحتوي على ترجمة جاهزة. النصوص الأصلية لا تتغير.";
+  toggle(false);
  }else{
-  note.textContent="هذه اللغة مرتبطة بالدولة، لكن ترجمة الموقع إليها غير منشورة بعد. يمكنك تصفح المحتوى بلغته الأصلية.";
+  feedback.textContent=language+" — "+country.a+": هذه اللغة متاحة للاختيار في الدليل، لكن ترجمة الموقع غير منشورة بعد. بقيت الصفحة بلغتها الحالية.";
  }
- selected.append(heading,line,note);
- trigger.textContent="🌐 "+flag(country.c)+" "+country.a+" · "+langName(code)+" ▾";
- grid.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.country===country.c)));
 }
 function render(){
- const query=search.value.trim().toLocaleLowerCase();
- const found=countries.filter(c=>(c.a+" "+c.n+" "+c.c+" "+langName(c.p)).toLocaleLowerCase().includes(query));
+ const q=search.value.trim().toLocaleLowerCase();
+ const found=countries.filter(c=>(c.a+" "+c.n+" "+c.c+" "+languageOptions(c).map(langName).join(" ")).toLocaleLowerCase().includes(q));
  status.textContent=found.length+" / 193";
  grid.replaceChildren(...found.map(c=>{
-  const button=document.createElement("button");button.type="button";button.className="ldt-global-country";button.dataset.country=c.c;button.setAttribute("aria-pressed","false");
-  const f=document.createElement("span");f.textContent=flag(c.c);f.setAttribute("aria-hidden","true");
-  const contents=document.createElement("span");const title=document.createElement("strong");title.textContent=c.a;const sub=document.createElement("small");sub.textContent=c.n+" · "+langName(c.p);contents.append(title,sub);
-  button.append(f,contents);button.addEventListener("click",()=>apply(c,true));return button;
+  const card=document.createElement("article");card.className="ldt-global-country-card";card.setAttribute("role","list");
+  const heading=document.createElement("h3");heading.className="ldt-country-heading";
+  const flagNode=document.createElement("span");flagNode.textContent=flag(c.c);flagNode.setAttribute("aria-hidden","true");
+  const countryName=document.createElement("span");countryName.textContent=c.a+" · "+c.n;
+  heading.append(flagNode,countryName);card.append(heading);
+  const buttons=document.createElement("div");buttons.className="ldt-country-languages";
+  for(const code of languageOptions(c)){
+   const b=document.createElement("button");b.type="button";b.className="ldt-country-language";
+   const available=translated.has(code);b.textContent=langName(code)+(available?" ✓":"");
+   b.setAttribute("aria-label",c.n+": "+langName(code)+(available?" — website translation available":" — translation not available"));
+   b.title=available?"الترجمة متاحة · Translation available":"الترجمة غير منشورة · Translation not available";
+   if(!available)b.classList.add("ldt-untranslated");
+   b.addEventListener("click",()=>selectLanguage(c,code));buttons.append(b);
+  }
+  card.append(buttons);return card;
  }));
 }
-function toggle(open){panel.hidden=!open;trigger.setAttribute("aria-expanded",String(open));if(open){search.focus();}else{trigger.focus();}}
+function toggle(open){panel.hidden=!open;trigger.setAttribute("aria-expanded",String(open));if(open)search.focus();else trigger.focus();}
 trigger.addEventListener("click",()=>toggle(panel.hidden));
 bar.querySelector("#ldt-close").addEventListener("click",()=>toggle(false));
 search.addEventListener("input",render);
 bar.addEventListener("keydown",e=>{if(e.key==="Escape"&&!panel.hidden)toggle(false);});
 render();
-let remembered=null;try{remembered=localStorage.getItem("ldt-country");}catch(e){}
-const country=countries.find(x=>x.c===remembered);
-if(country)apply(country,false);
 })();
