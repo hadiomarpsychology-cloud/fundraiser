@@ -28,3 +28,19 @@
 .ldt-global-quick button{border:1px solid #755038;background:transparent;color:#ffe0be;padding:5px 8px;border-radius:6px;font:12px/1.3 system-ui,sans-serif;cursor:pointer}
 .ldt-global-quick button:hover,.ldt-global-quick button:focus-visible{background:#5d3927;outline:2px solid #e97824}
 @media(max-width:650px){.ldt-global-quick{order:3;width:100%;overflow-x:auto;flex-wrap:nowrap}.ldt-global-quick button{white-space:nowrap}}
+
+/* Single accessible control */
+.ldt-one-menu .ldt-global-line{min-height:64px}
+.ldt-one-menu .ldt-global-trigger{min-height:44px;font-size:16px}
+.ldt-one-menu .ldt-global-inner{gap:16px}
+.ldt-one-menu .ldt-global-langs{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px}
+.ldt-one-menu .ldt-global-lang{min-height:48px;font-size:17px;font-weight:650;padding:11px 14px}
+.ldt-one-menu .ldt-global-lang[aria-pressed="true"]{background:#e97824;color:#23170f;border-color:#a64e15;box-shadow:inset 0 0 0 1px #9a4812}
+.ldt-one-menu .ldt-global-panel{direction:rtl}
+.ldt-one-menu #ldt-countries-details{border:1px solid #dfc2a3;padding:16px;border-radius:9px;background:#fff;max-width:100%}
+.ldt-one-menu #ldt-countries-details summary{cursor:pointer;font-size:16px;font-weight:750;min-height:34px}
+.ldt-one-menu #ldt-countries-details summary:focus-visible{outline:3px solid #e97824}
+.ldt-one-menu .ldt-global-country{cursor:default;min-height:58px}
+.ldt-one-menu .ldt-global-country:focus-visible{outline:3px solid #e97824}
+.ldt-one-menu #ldt-close{max-width:170px}
+@media(max-width:630px){.ldt-one-menu .ldt-global-langs{grid-template-columns:1fr 1fr}.ldt-one-menu .ldt-global-panel{max-height:80vh}}
