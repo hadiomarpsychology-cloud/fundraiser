@@ -1,0 +1,25 @@
+/* Global access bar — orange LDT visual language */
+.ldt-global{direction:rtl;background:#241c19;color:#fbe6d0;position:relative;z-index:30;border-bottom:1px solid #845034;font:15px/1.5 system-ui,-apple-system,sans-serif}
+.ldt-global *{box-sizing:border-box}
+.ldt-global .ldt-global-line{max-width:1100px;margin:auto;display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:10px 20px}
+.ldt-global-mark{font-size:22px;color:#ffb56e;line-height:1}
+.ldt-global-title{font-weight:800;color:#ffe4c5}
+.ldt-global-hint{font-size:12px;color:#cdb09b}
+.ldt-global-trigger{margin-inline-start:auto;border:1px solid #ffb66b;background:#fff8ef;color:#241c19;border-radius:9px;font:inherit;font-weight:800;padding:8px 13px;cursor:pointer}
+.ldt-global-trigger:hover,.ldt-global-trigger:focus-visible{outline:2px solid #ffa25b;outline-offset:2px}
+.ldt-global-panel{background:#fff8ef;color:#30221a;border-bottom:4px solid #e97824;box-shadow:0 16px 33px #211a1722;padding:20px;max-height:min(72vh,650px);overflow:auto}
+.ldt-global-panel[hidden]{display:none!important}
+.ldt-global-inner{max-width:1100px;margin:auto;display:grid;gap:13px}
+.ldt-global-search{background:white;border:1px solid #e7c7aa;padding:12px;border-radius:8px;font:inherit;width:100%;color:#211a17}
+.ldt-global-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:8px;max-height:340px;overflow:auto}
+.ldt-global-country{background:#fff;border:1px solid #e6d2bf;padding:10px 11px;border-radius:8px;text-align:start;display:flex;align-items:center;gap:9px;font:inherit;cursor:pointer;color:#34241b}
+.ldt-global-country[aria-pressed="true"]{border-color:#b85f24;background:#ffebce}
+.ldt-global-country:hover{border-color:#e97824}
+.ldt-global-country span{font-size:13px}
+.ldt-global-country strong{display:block;font-size:14px}
+.ldt-global-choice{padding:12px 14px;border-radius:9px;background:#fff0dc;border:1px solid #e8c09c}
+.ldt-global-langs{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.ldt-global-lang{font:inherit;border:1px solid #d99b63;border-radius:7px;background:white;color:#30221a;padding:7px 11px;cursor:pointer}
+.ldt-global-lang:hover{background:#ffe3be}
+.ldt-global-note{font-size:12px;color:#665447;margin:0}
+@media(max-width:640px){.ldt-global-line{padding:10px 14px}.ldt-global-hint{display:none}.ldt-global-title{font-size:13px}.ldt-global-trigger{font-size:13px}.ldt-global-panel{padding:13px}.ldt-global-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}}
