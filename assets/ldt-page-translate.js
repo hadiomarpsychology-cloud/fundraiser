@@ -61,13 +61,17 @@ async function start(code){
  if(!("Translator" in window)){status("Your browser does not support on-device page translation. The original content remains available.");return false;}
  const jobs={};
  try {
-  // Start model creation within the user's click gesture.
-  for(const from of ["ar","en"]){if(from!==target)jobs[from]=window.Translator.create({sourceLanguage:from,targetLanguage:target,monitor(m){m.addEventListener("downloadprogress",e=>{if(token===requestId)status("Preparing translation on your device… "+Math.round((e.loaded||0)*100)+"%");});}});}
+  // Only request language models actually required by this page.
+  const all=collect();
+  const sources=[...new Set(all.map(x=>x.from).filter(from=>from!==target))];
+  // Begin creation synchronously within the language-button click gesture.
+  for(const from of sources){
+   jobs[from]=window.Translator.create({sourceLanguage:from,targetLanguage:target,monitor(m){m.addEventListener("downloadprogress",e=>{if(token===requestId)status("Preparing translation on your device… "+Math.round((e.loaded||0)*100)+"%");});}});
+  }
   sessions={};
   for(const from of Object.keys(jobs))sessions[from]=await jobs[from];
   if(token!==requestId)return false;
   activeTarget=target;
-  const all=collect();
   status("Translating the whole page on your device…");
   translating=true;
   let completed=0,failed=0;const queue=all.slice();
