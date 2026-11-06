@@ -1,0 +1,18 @@
+/* LDT unified visual language — warm orange editorial system. */
+:root{--ldt-orange:#e97824;--ldt-apricot:#ffb467;--ldt-cream:#fff8ef;--ldt-ink:#211a17;--ldt-gold:#d5a53a;--ldt-red:#85252b;--ldt-stroke:rgba(90,43,19,.19);--ldt-font:system-ui,-apple-system,"Noto Sans Arabic",sans-serif}
+html{color-scheme:light;scroll-behavior:smooth}body{background:var(--ldt-cream);font-family:var(--ldt-font)}
+:where(a,button,select,input,textarea):focus-visible{outline:3px solid #e97824!important;outline-offset:3px}
+::selection{background:#ffb467;color:#24170f}
+header{box-shadow:0 1px 0 rgba(255,164,73,.22);backdrop-filter:blur(12px)}
+.hero{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(circle at 83% 27%,rgba(255,235,182,.60),transparent 28%),radial-gradient(circle at 15% 94%,rgba(210,73,24,.28),transparent 40%),linear-gradient(125deg,#ffbe70 0%,#f7953f 54%,#dc681d 100%)}
+.hero::before{content:"";position:absolute;width:clamp(180px,29vw,375px);aspect-ratio:1;border:2px solid rgba(255,250,232,.5);border-radius:50%;inset-block-start:12%;inset-inline-end:-7%;box-shadow:0 0 0 24px rgba(255,250,232,.10),0 0 0 50px rgba(116,43,23,.08);pointer-events:none;z-index:-1}
+.hero :is(h1,h2){font-family:var(--ldt-font);font-weight:850;letter-spacing:-.025em;text-wrap:balance}
+.hero .kicker,.hero .eyebrow{letter-spacing:.09em}
+.btn,button{transition:transform .17s ease,box-shadow .17s ease,filter .17s ease}
+.btn:hover,button:hover{filter:brightness(1.04);transform:translateY(-1px)}
+.tile,.card,.panel,.deskbox{border-radius:14px;box-shadow:0 8px 24px rgba(70,33,11,.045)}
+.tile h3,.card h3{font-weight:800}.tile:hover,.card:hover{border-color:#e7ac6d}
+.sovereign{background:linear-gradient(145deg,#85252b,#521c25)}.sovereign .tile{box-shadow:none}
+:where(.number,.kicker,.eyebrow){text-transform:none}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+@media(max-width:650px){.hero::before{opacity:.5;inset-inline-end:-22%}.hero{padding-block:62px}}
