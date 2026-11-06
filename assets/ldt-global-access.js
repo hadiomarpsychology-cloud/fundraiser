@@ -18,42 +18,41 @@ function selectLanguage(country,code){
  const language=langName(code);
  const base=code==="en"?"en-GB":code;
  const local=["ar","fa","ckb","he","en-GB"].includes(base);
- const translationAvailable=typeof window.LDTFullTranslate==="function";
- if(!translationAvailable&&!local){
-  feedback.textContent=language+": full-page translation is not available in this browser. The original site remains readable.";return;
+ const hasFullTranslator=typeof window.LDTFullTranslate==="function"&&typeof window.Translator!=="undefined";
+ const onDeviceLanguages=new Set("ar bg bn cs da de el en es fi fr he hi hr hu id it ja kn ko lt mr nl no pl pt ro ru sk sl sv ta te th tr uk vi zh-CN zh-TW en-GB".split(" "));
+ if(!local&&(!hasFullTranslator||!onDeviceLanguages.has(code))){
+  feedback.textContent=country.n+" · "+language+": a full translation is not available on this browser. The original page remains visible. Please select a country with a supported website language.";
+  feedback.hidden=false;
+  return;
  }
- try{localStorage.setItem("ldt-country",country.c);}catch(e){}
- const activate=()=>{
-  window.dispatchEvent(new CustomEvent("ldt-language-change",{detail:local?base:"ar"}));
-  if(code==="ar"){
-   window.LDTRestoreText?.();
-   document.documentElement.lang="ar";document.documentElement.dir="rtl";
-   try{localStorage.setItem("ldt-global-language","ar");}catch(e){}
-   feedback.textContent="عاد النص الأصلي بالعربية حيث يتوفر.";
-   trigger.textContent="🌐 "+flag(country.c)+" "+language+" ▾";
-   toggle(false);
+ if(typeof window.LDTRestoreText==="function")window.LDTRestoreText();
+ if(local)window.dispatchEvent(new CustomEvent("ldt-language-change",{detail:base}));
+ const complete=(ok)=>{
+  if(!ok&&!local){
+   feedback.textContent=country.n+" · "+language+": full translation is unavailable. Original content remains visible.";
+   feedback.hidden=false;
    return;
   }
-  if(!translationAvailable){
-   document.documentElement.lang=base;
-   trigger.textContent="🌐 "+flag(country.c)+" "+language+" ▾";
-   toggle(false);
-   feedback.textContent="Only the available page interface was changed. The full text remains in its original languages.";
-   return;
-  }
-  const task=window.LDTFullTranslate(code);
-  feedback.textContent="Preparing full-page translation on your device…";
+  try{
+   localStorage.setItem("ldt-country",country.c);
+   localStorage.setItem("ldt-global-language",base);
+  }catch(e){}
   trigger.textContent="🌐 "+flag(country.c)+" "+language+" ▾";
+  feedback.textContent=ok?"Translation was applied where supported. Please review machine-translated text.":"The available website interface was translated; original portfolio documents remain unchanged.";
   toggle(false);
-  Promise.resolve(task).then(ok=>{
-   if(ok){try{localStorage.setItem("ldt-global-language",base);}catch(e){}}
-   else if(local){
-    window.dispatchEvent(new CustomEvent("ldt-language-change",{detail:base}));
-    feedback.textContent="Only the built-in page translation is available here; the full text remains in its original languages.";
-   }
-  }).catch(()=>{feedback.textContent="Full-page translation is unavailable. Original text is preserved."});
  };
- activate();
+ if(code==="ar"){
+  window.dispatchEvent(new CustomEvent("ldt-language-change",{detail:"ar"}));
+  document.documentElement.lang="ar";document.documentElement.dir="rtl";
+  complete(false);return;
+ }
+ if(!hasFullTranslator){complete(local);return;}
+ feedback.textContent="Preparing "+language+" translation…";
+ const task=window.LDTFullTranslate(code);
+ Promise.resolve(task).then(ok=>{
+  if(!ok&&local)window.dispatchEvent(new CustomEvent("ldt-language-change",{detail:base}));
+  complete(Boolean(ok)||local);
+ }).catch(()=>complete(local));
 }
 document.addEventListener("ldt-translation-status",e=>{feedback.textContent=e.detail});
 function render(){
@@ -67,7 +66,7 @@ function render(){
   const f=document.createElement("span");f.textContent=flag(c.c);f.className="ldt-option-flag";f.setAttribute("aria-hidden","true");
   const content=document.createElement("span");content.className="ldt-option-details";
   const country=document.createElement("strong");country.textContent=c.a+" · "+c.n;
-  const language=document.createElement("span");language.textContent=langName(code)+(available?" · ترجمة تعتمد على المتصفح":" · عرض اللغة فقط");
+  const language=document.createElement("span");language.textContent=langName(code)+(available?" · قد تتوفر الترجمة":" · الترجمة غير متاحة حاليًا");
   content.append(country,language);b.append(f,content);
   b.setAttribute("aria-label",c.n+" — "+langName(code)+(available?" — browser translation may be available":" — translation not yet available"));
   b.addEventListener("click",()=>selectLanguage(c,code));return b;
