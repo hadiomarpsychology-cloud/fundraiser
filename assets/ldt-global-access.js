@@ -11,6 +11,15 @@ wrap.innerHTML='<div class="ldt-global-line"><span class="ldt-global-mark" aria-
 document.body.insertBefore(wrap,document.body.firstChild);
 const trigger=wrap.querySelector(".ldt-global-trigger"),panel=wrap.querySelector(".ldt-global-panel"),search=wrap.querySelector("#ldt-country-search"),grid=wrap.querySelector("#ldt-country-grid"),choice=wrap.querySelector("#ldt-country-choice"),result=wrap.querySelector("#ldt-country-result");
 const nativeSelect=document.querySelector("select#language,select#lang");
+if(nativeSelect){
+ const quick=document.createElement("div");quick.className="ldt-global-quick";
+ for(const item of [["ar","العربية"],["fa","فارسی"],["ckb","کوردی"],["he","עברית"],["en-GB","English (UK)"]]){
+  if(!Array.from(nativeSelect.options).some(o=>o.value===item[0]))continue;
+  const b=document.createElement("button");b.type="button";b.textContent=item[1];b.addEventListener("click",()=>chooseLanguage(item[0]));quick.append(b);
+ }
+ wrap.querySelector(".ldt-global-line").insertBefore(quick,trigger);
+}
+
 const builtIn=["ar","fa","ckb","he","en-GB"];
 const builtInLabels={"ar":"العربية","fa":"فارسی","ckb":"کوردی سۆرانی","he":"עברית","en-GB":"English (UK)"};
 function flag(code){return Array.from(code.toUpperCase()).map(c=>String.fromCodePoint(127397+c.charCodeAt(0))).join("");}
