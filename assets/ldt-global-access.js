@@ -14,38 +14,67 @@ root.innerHTML='<div class="ldt-global-line"><button class="ldt-global-trigger" 
 document.body.insertBefore(root,document.body.firstChild);
 const trigger=root.querySelector(".ldt-global-trigger"),panel=root.querySelector("#ldt-language-panel"),search=root.querySelector("#ldt-language-search"),grid=root.querySelector("#ldt-language-options"),count=root.querySelector("#ldt-language-count"),feedback=root.querySelector("#ldt-language-feedback");
 const native=new Set(["ar","fa","ckb","he","en"]);
+const rtl=new Set(["ar","fa","ckb","he","ur","ps","sd","ug","yi"]);
+const codeSet=new Set(codes);
 function toggle(open){panel.hidden=!open;trigger.setAttribute("aria-expanded",String(open));if(open)search.focus();else trigger.focus();}
 function updateLocal(code){window.dispatchEvent(new CustomEvent("ldt-language-change",{detail:code==="en"?"en-GB":code}));}
-function choose(code){
+function browserChoice(){
+ const browserLanguages=Array.isArray(navigator.languages)&&navigator.languages.length?navigator.languages:[navigator.language||"ar"];
+ for(const value of browserLanguages){
+  const lower=String(value).toLowerCase();
+  let candidates=[lower,lower.split("-")[0]];
+  if(lower.startsWith("zh-hant")||/zh-(tw|hk|mo)/.test(lower))candidates=["zh-TW","zh-CN"];
+  if(lower.startsWith("zh"))candidates=["zh-CN","zh-TW"];
+  if(lower.startsWith("ku-arab")||lower.startsWith("ckb"))candidates=["ckb","ku"];
+  if(lower.startsWith("en"))candidates=["en"];
+  if(lower.startsWith("he")||lower.startsWith("iw"))candidates=["he"];
+  if(lower.startsWith("fa"))candidates=["fa"];
+  for(const choice of candidates){const matched=[...codeSet].find(x=>x.toLowerCase()===choice.toLowerCase());if(matched)return matched;}
+ }
+ return "ar";
+}
+function storedChoice(){
+ try{
+  const saved=localStorage.getItem("ldt-global-language");
+  if(saved){const normal=saved==="en-GB"?"en":saved;return codeSet.has(normal)?normal:null;}
+ }catch(e){}
+ return null;
+}
+let current=null;
+function report(message){feedback.textContent=message;}
+function choose(code,automatic=false){
+ if(!codeSet.has(code))return;
  const label=languageName(code),local=native.has(code);
+ if(current===code&&!automatic){toggle(false);return;}
+ current=code;
  if(typeof window.LDTRestoreText==="function")window.LDTRestoreText();
+ // Prepared site translations are immediate; page-wide machine translation is optional.
  if(local)updateLocal(code);
  if(code==="ar"){
   document.documentElement.lang="ar";document.documentElement.dir="rtl";
   trigger.textContent="🌐 "+label+" ▾";
   try{localStorage.setItem("ldt-global-language","ar");}catch(e){}
-  toggle(false);return;
- }
- const canTranslate=typeof window.LDTFullTranslate==="function"&&typeof window.Translator!=="undefined";
- if(!canTranslate){
-  if(local){
-   document.documentElement.lang=code;document.documentElement.dir=code==="en"?"ltr":"rtl";
-   trigger.textContent="🌐 "+label+" ▾";toggle(false);
-   feedback.textContent="Navigation translation applied; complete page translation is not supported by this browser.";
-  }else feedback.textContent=label+": full-page translation is not supported by this browser; original text remains visible.";
+  if(!automatic)toggle(false);
+  report("Arabic selected; original content displayed.");
   return;
  }
- feedback.textContent="Preparing "+label+" translation on this device…";
- Promise.resolve(window.LDTFullTranslate(code)).then(ok=>{
+ const canTranslate=typeof window.LDTFullTranslate==="function"&&typeof window.Translator!=="undefined";
+ const applySelection=(ok)=>{
   if(ok||local){
    if(!ok&&local)updateLocal(code);
    document.documentElement.lang=code;
-   document.documentElement.dir=/^(ar|fa|ckb|he|ur|ps|sd|ug|yi)$/.test(code)?"rtl":"ltr";
+   document.documentElement.dir=rtl.has(code)?"rtl":"ltr";
    trigger.textContent="🌐 "+label+" ▾";
    try{localStorage.setItem("ldt-global-language",code);}catch(e){}
-   toggle(false);
-  }else feedback.textContent=label+": translation is unavailable in this browser. Original content preserved.";
- }).catch(()=>{feedback.textContent=label+": translation unavailable; original content preserved.";});
+   if(!automatic)toggle(false);
+   report(ok?"Page translation applied where supported; review automatically translated text.":"Prepared interface translation applied. Full-page translation is not available in this browser.");
+  }else{
+   report(label+": full-page translation is unavailable in this browser. Original content is shown.");
+  }
+ };
+ if(!canTranslate){applySelection(false);return;}
+ report("Preparing "+label+" translation locally…");
+ Promise.resolve(window.LDTFullTranslate(code)).then(applySelection).catch(()=>applySelection(false));
 }
 function render(){
  const q=search.value.trim().toLocaleLowerCase();
@@ -61,4 +90,7 @@ search.addEventListener("input",render);
 root.addEventListener("keydown",e=>{if(e.key==="Escape"&&!panel.hidden)toggle(false)});
 document.addEventListener("ldt-translation-status",e=>{feedback.textContent=String(e.detail||"")});
 render();
+const initial=storedChoice()||browserChoice();
+// Respect the user's chosen language on every page, or detect it for a first visit.
+choose(initial,true);
 })();
