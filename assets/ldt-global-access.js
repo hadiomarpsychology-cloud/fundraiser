@@ -10,10 +10,12 @@ if(!codes.includes("he"))codes.push("he");
 if(!codes.includes("ar"))codes.push("ar");
 function languageName(code){if(names[code])return names[code];try{return new Intl.DisplayNames(["en"],{type:"language"}).of(code)||code;}catch(e){return code;}}
 const root=document.createElement("section");root.className="ldt-global ldt-one-menu";root.setAttribute("aria-label","Language selection / اختيار اللغة");
-root.innerHTML='<div class="ldt-global-line"><button class="ldt-global-trigger" type="button" aria-expanded="false" aria-controls="ldt-language-panel">🌐 اللغات · Languages ▾</button></div><div class="ldt-global-panel" id="ldt-language-panel" hidden><div class="ldt-global-inner"><label for="ldt-language-search">اللغة · Language</label><input id="ldt-language-search" class="ldt-global-search" type="search" placeholder="Search language · ابحث عن لغة" autocomplete="off"><p id="ldt-language-count" role="status"></p><div id="ldt-language-options" class="ldt-global-grid" role="group" aria-label="Languages"></div><p id="ldt-language-feedback" class="ldt-global-note" role="status" aria-live="polite">Selecting a language changes page content where translations are available. Other languages may require browser support; original content remains available.</p><button class="ldt-global-lang" id="ldt-language-close" type="button">إغلاق · Close</button></div></div>';
+root.innerHTML='<div class="ldt-global-line"><div class="ldt-instant-languages" role="group" aria-label="Quick language selection"><button type="button" data-lang="ar" lang="ar">عربي</button><button type="button" data-lang="en" lang="en">EN</button><button type="button" data-lang="fr" lang="fr">FR</button><button type="button" data-lang="es" lang="es">ES</button><button type="button" data-lang="de" lang="de">DE</button></div><button class="ldt-global-trigger" type="button" aria-expanded="false" aria-controls="ldt-language-panel">🌐 اللغات · Languages ▾</button></div><div class="ldt-global-panel" id="ldt-language-panel" hidden><div class="ldt-global-inner"><label for="ldt-language-search">اللغة · Language</label><input id="ldt-language-search" class="ldt-global-search" type="search" placeholder="Search language · ابحث عن لغة" autocomplete="off"><p id="ldt-language-count" role="status"></p><div id="ldt-language-options" class="ldt-global-grid" role="group" aria-label="Languages"></div><p id="ldt-language-feedback" class="ldt-global-note" role="status" aria-live="polite">Selecting a language changes page content where translations are available. Other languages may require browser support; original content remains available.</p><button class="ldt-global-lang" id="ldt-language-close" type="button">إغلاق · Close</button></div></div>';
 document.body.insertBefore(root,document.body.firstChild);
 const trigger=root.querySelector(".ldt-global-trigger"),panel=root.querySelector("#ldt-language-panel"),search=root.querySelector("#ldt-language-search"),grid=root.querySelector("#ldt-language-options"),count=root.querySelector("#ldt-language-count"),feedback=root.querySelector("#ldt-language-feedback");
 const native=new Set(["ar","fa","ckb","he","en"]);
+const quick=[...root.querySelectorAll("[data-lang]")];
+function markQuick(code){quick.forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===code)));}
 const rtl=new Set(["ar","fa","ckb","he","ur","ps","sd","ug","yi"]);
 const codeSet=new Set(codes);
 function toggle(open){panel.hidden=!open;trigger.setAttribute("aria-expanded",String(open));if(open)search.focus();else trigger.focus();}
@@ -47,6 +49,7 @@ function choose(code,automatic=false){
  const label=languageName(code),local=native.has(code);
  if(current===code&&!automatic){toggle(false);return;}
  current=code;
+ markQuick(code);
  if(typeof window.LDTRestoreText==="function")window.LDTRestoreText();
  // Prepared site translations are immediate; page-wide machine translation is optional.
  if(local)updateLocal(code);
@@ -84,6 +87,7 @@ function render(){
   const b=document.createElement("button");b.type="button";b.className="ldt-country-language-option";b.textContent=languageName(code);b.setAttribute("lang",code);b.addEventListener("click",()=>choose(code));return b;
  }));
 }
+quick.forEach(b=>b.addEventListener("click",()=>choose(b.dataset.lang)));
 trigger.addEventListener("click",()=>toggle(panel.hidden));
 root.querySelector("#ldt-language-close").addEventListener("click",()=>toggle(false));
 search.addEventListener("input",render);
