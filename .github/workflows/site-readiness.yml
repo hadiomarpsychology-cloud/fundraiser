@@ -1,0 +1,44 @@
+name: LDT site readiness checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify core website and business pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          for path in index.html services/index.html portfolio/index.html career-passport/index.html institutional-review/index.html library/index.html publications/index.html owner-library/index.html CNAME; do
+            test -s "$path" || { echo "Missing or empty: $path"; exit 1; }
+          done
+          grep -Fxq 'psychologistx.art' CNAME
+          grep -q 'Biology and science education' services/index.html
+          grep -q 'Clinical service availability enquiry (subject to licensure)' services/index.html
+          grep -q 'Private text-readable copy prepared' library/index.html
+          python3 - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          class Checker(HTMLParser):
+              def __init__(self): super().__init__(); self.hrefs=[]
+              def handle_starttag(self, tag, attrs):
+                  if tag == 'a': self.hrefs.extend(v for k,v in attrs if k=='href' and v)
+          count=0
+          for f in Path('.').rglob('*.html'):
+              parser=Checker(); parser.feed(f.read_text(encoding='utf-8'))
+              for ref in parser.hrefs:
+                  if ref.startswith(('http:', 'https:', 'mailto:', 'tel:', '#','javascript:','data:')): continue
+                  path=ref.split('#',1)[0].split('?',1)[0]
+                  if not path: continue
+                  target=(f.parent/path)
+                  if target.is_dir(): target=target/'index.html'
+                  if not target.exists(): print('WARNING missing local link:',f,ref)
+              count+=1
+          print(f'Parsed {count} HTML pages.')
+          PY
