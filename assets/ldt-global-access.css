@@ -141,3 +141,11 @@
   .ldt-one-menu .ldt-global-trigger{max-width:150px!important}
   .ldt-one-menu .ldt-global-panel{max-height:69dvh!important}
 }
+
+/* LDT immediate in-page language switches: no redirect, refresh or downloads */
+.ldt-one-menu .ldt-instant-languages{display:flex;flex-wrap:nowrap;align-items:center;gap:4px;padding:4px;background:#fff8ef;border-radius:28px;border:1px solid #d39b70;box-shadow:0 2px 10px rgba(24,12,8,.12)}
+.ldt-one-menu .ldt-instant-languages button{border:0;border-radius:20px;padding:8px 9px;background:transparent;color:#351f15;font:700 12px/1 system-ui,sans-serif;cursor:pointer;min-height:32px}
+.ldt-one-menu .ldt-instant-languages button[aria-pressed="true"]{color:#fff;background:#8e3f15}
+.ldt-one-menu .ldt-instant-languages button:focus-visible{outline:3px solid #fa922c;outline-offset:2px}
+.ldt-one-menu .ldt-global-line{gap:5px!important;flex-wrap:nowrap!important}
+@media(max-width:570px){.ldt-one-menu .ldt-instant-languages{max-width:calc(100vw - 126px);overflow-x:auto}.ldt-one-menu .ldt-instant-languages button{padding:6px 7px;font-size:11px;flex:none}.ldt-one-menu .ldt-global-trigger{max-width:98px!important;padding:7px!important}}
