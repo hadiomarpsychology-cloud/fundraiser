@@ -16,7 +16,7 @@ const trigger=root.querySelector(".ldt-global-trigger"),panel=root.querySelector
 const native=new Set(["ar","fa","ckb","he","en"]);
 const rtl=new Set(["ar","fa","ckb","he","ur","ps","sd","ug","yi"]);
 const codeSet=new Set(codes);
-function toggle(open){panel.hidden=!open;trigger.setAttribute("aria-expanded",String(open));if(open)search.focus();else trigger.focus();}
+function toggle(open){panel.hidden=!open;trigger.setAttribute("aria-expanded",String(open));if(open){render();search.focus();}else trigger.focus();}
 function updateLocal(code){window.dispatchEvent(new CustomEvent("ldt-language-change",{detail:code==="en"?"en-GB":code}));}
 function browserChoice(){
  const browserLanguages=Array.isArray(navigator.languages)&&navigator.languages.length?navigator.languages:[navigator.language||"ar"];
@@ -40,41 +40,29 @@ function storedChoice(){
  }catch(e){}
  return null;
 }
-let current=null;
+let current=null,selection=0;
 function report(message){feedback.textContent=message;}
 function choose(code,automatic=false){
  if(!codeSet.has(code))return;
- const label=languageName(code),local=native.has(code);
- if(current===code&&!automatic){toggle(false);return;}
+ const token=++selection,label=languageName(code),local=native.has(code);
  current=code;
  if(typeof window.LDTRestoreText==="function")window.LDTRestoreText();
- // Prepared site translations are immediate; page-wide machine translation is optional.
- if(local)updateLocal(code);
- if(code==="ar"){
-  document.documentElement.lang="ar";document.documentElement.dir="rtl";
+ if(local){
+  updateLocal(code);
   trigger.textContent="🌐 "+label+" ▾";
-  try{localStorage.setItem("ldt-global-language","ar");}catch(e){}
+  try{localStorage.setItem("ldt-global-language",code);}catch(e){}
+  report("Prepared site text selected instantly where available. Original documents are unchanged.");
   if(!automatic)toggle(false);
-  report("Arabic selected; original content displayed.");
   return;
  }
- const canTranslate=typeof window.LDTFullTranslate==="function"&&typeof window.Translator!=="undefined";
- const applySelection=(ok)=>{
-  if(ok||local){
-   if(!ok&&local)updateLocal(code);
-   document.documentElement.lang=code;
-   document.documentElement.dir=rtl.has(code)?"rtl":"ltr";
-   trigger.textContent="🌐 "+label+" ▾";
-   try{localStorage.setItem("ldt-global-language",code);}catch(e){}
-   if(!automatic)toggle(false);
-   report(ok?"Page translation applied where supported; review automatically translated text.":"Prepared interface translation applied. Full-page translation is not available in this browser.");
-  }else{
-   report(label+": full-page translation is unavailable in this browser. Original content is shown.");
-  }
- };
- if(!canTranslate){applySelection(false);return;}
- report("Preparing "+label+" translation locally…");
- Promise.resolve(window.LDTFullTranslate(code)).then(applySelection).catch(()=>applySelection(false));
+ if(automatic){report("Choose a language to request optional translation.");return;}
+ if(typeof window.LDTFullTranslate!=="function"||typeof window.Translator==="undefined"){report(label+": browser translation unavailable. Original text remains visible.");return;}
+ report("Optional translation requested. This language may require browser translation resources.");
+ Promise.resolve(window.LDTFullTranslate(code)).then(ok=>{
+  if(token!==selection)return;
+  if(ok){document.documentElement.lang=code;document.documentElement.dir=rtl.has(code)?"rtl":"ltr";trigger.textContent="🌐 "+label+" ▾";try{localStorage.setItem("ldt-global-language",code);}catch(e){}toggle(false);}
+  else report(label+": translation unavailable. Original text remains visible.");
+ }).catch(()=>{if(token===selection)report("Translation unavailable.");});
 }
 function render(){
  const q=search.value.trim().toLocaleLowerCase();
@@ -89,7 +77,6 @@ root.querySelector("#ldt-language-close").addEventListener("click",()=>toggle(fa
 search.addEventListener("input",render);
 root.addEventListener("keydown",e=>{if(e.key==="Escape"&&!panel.hidden)toggle(false)});
 document.addEventListener("ldt-translation-status",e=>{feedback.textContent=String(e.detail||"")});
-render();
 const initial=storedChoice()||browserChoice();
 // Respect the user's chosen language on every page, or detect it for a first visit.
 choose(initial,true);
