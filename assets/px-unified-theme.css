@@ -1,0 +1,41 @@
+/* psychologistx.art unified visual language — warm orange editorial system. */
+:root{--px-orange:#e97824;--px-apricot:#ffb467;--px-cream:#fff8ef;--px-ink:#211a17;--px-gold:#d5a53a;--px-red:#85252b;--px-stroke:rgba(90,43,19,.19);--px-font:system-ui,-apple-system,"Noto Sans Arabic",sans-serif}
+html{color-scheme:light;scroll-behavior:smooth}body{background:var(--px-cream);font-family:var(--px-font)}
+:where(a,button,select,input,textarea):focus-visible{outline:3px solid #e97824!important;outline-offset:3px}
+::selection{background:#ffb467;color:#24170f}
+header{box-shadow:0 1px 0 rgba(255,164,73,.22);backdrop-filter:blur(12px)}
+.hero{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(circle at 83% 27%,rgba(255,235,182,.60),transparent 28%),radial-gradient(circle at 15% 94%,rgba(210,73,24,.28),transparent 40%),linear-gradient(125deg,#ffbe70 0%,#f7953f 54%,#dc681d 100%)}
+.hero::before{content:"";position:absolute;width:clamp(180px,29vw,375px);aspect-ratio:1;border:2px solid rgba(255,250,232,.5);border-radius:50%;inset-block-start:12%;inset-inline-end:-7%;box-shadow:0 0 0 24px rgba(255,250,232,.10),0 0 0 50px rgba(116,43,23,.08);pointer-events:none;z-index:-1}
+.hero :is(h1,h2){font-family:var(--px-font);font-weight:850;letter-spacing:-.025em;text-wrap:balance}
+.hero .kicker,.hero .eyebrow{letter-spacing:.09em}
+.btn,button{transition:transform .17s ease,box-shadow .17s ease,filter .17s ease}
+.btn:hover,button:hover{filter:brightness(1.04);transform:translateY(-1px)}
+.tile,.card,.panel,.deskbox{border-radius:14px;box-shadow:0 8px 24px rgba(70,33,11,.045)}
+.tile h3,.card h3{font-weight:800}.tile:hover,.card:hover{border-color:#e7ac6d}
+
+:where(.number,.kicker,.eyebrow){text-transform:none}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+@media(max-width:650px){.hero::before{opacity:.5;inset-inline-end:-22%}.hero{padding-block:62px}}
+
+/* Bank meeting prototype: dark copper palette, loaded after page styles. */
+html{color-scheme:dark!important;background:#101010!important}body{--ink:#f5eee7;--cream:#101010;--paper:#101010;--bg:#101010;--muted:#bcb2aa;--orange:#ff922e;--px-cream:#101010;--px-ink:#f5eee7;--px-orange:#ff922e;background:#101010!important;color:#f5eee7!important}header,footer,.bar,.top{background:#151311!important;color:#f5eee7!important;border-color:#694326!important}a{color:#ffb16c}h1,h2,h3,h4{color:inherit} .hero{background:radial-gradient(ellipse at 85% 10%,#53301b 0%,transparent 55%),linear-gradient(115deg,#101010,#241912)!important;color:#fff3e6!important;border-bottom:1px solid #8b4c24;padding-inline:clamp(12px,3vw,36px)}.hero::before{border-color:#f78b35!important;box-shadow:0 0 45px #f78b3533!important}.hero h1{font-size:clamp(32px,5vw,68px);max-width:1000px}.tile,.card,.panel,.deskbox,.box,.note,.warning,.answer,.rates-box,.tier-links a,main>section:not(.hero),.desk,.support{background:#1c1917!important;color:#f5eee7!important;border-color:#694326!important;box-shadow:none!important}.tile p,.card p,.help,.status,.muted,.number,.kicker,.eyebrow{color:#d9bca2!important}.tile:hover,.card:hover{border-color:#ff922e!important}.btn,button:not(.px-global-lang):not(.px-global-trigger){background:#e97824!important;color:#140d08!important;border:1px solid #ffae68!important;font-weight:750}.btn.light,.tier-links a{background:#211a16!important;color:#ffbc83!important;border:1px solid #8a542e!important}input:not([type=checkbox]):not([type=radio]),select,textarea{background:#141210!important;color:#f5eee7!important;border-color:#856044!important}table,th,td,hr{border-color:#694326!important}th{background:#2c2017!important;color:#fff3e6!important}.px-global-panel,.px-global-country,.px-global-choice,.px-global-lang,.px-country-language-option{background:#211a16!important;color:#fff3e6!important;border-color:#8a542e!important}.px-global-trigger{background:#211a16!important;color:#ffb16c!important}.px-global-note{color:#d9bca2!important} .px-prototype-nav{display:flex;flex-wrap:wrap;gap:12px;padding:13px max(20px,calc((100vw - 1080px)/2));background:#171310;border-bottom:1px solid #684326;font:600 14px/1.5 system-ui}.px-prototype-nav a{text-decoration:none;color:#ffb16c}.px-prototype-nav a:first-child{color:#fff;font-weight:900}.px-showcase{padding:48px 0!important}.px-showcase .tile a{display:inline-block;margin-top:8px}.px-disclosure{color:#d9bca2;font-size:14px}.px-red-theme{--orange:#ef6969;--px-orange:#ef6969}.px-red-theme .hero,.px-red-theme .panel,.px-red-theme .note{background:#211315!important;border-color:#972b35!important}.px-red-theme a,.px-red-theme .px-prototype-nav a{color:#ff9999}.px-red-theme button:not(.px-global-trigger){background:#a52d38!important;color:white!important}
+@media(max-width:680px){.px-prototype-nav{padding-top:60px}.hero{padding-block:42px!important}}
+
+/* Presentation refinement: consistent charcoal, copper and accessible controls. */
+body{--paper-dark:#27211d;--night:#171412;--gold:#ffb467;--sage:#d8a478;--muted:#c6bcb3}
+.px-prototype-nav{position:relative;justify-content:center;align-items:center;gap:16px;padding:16px 24px;background:#0c0c0d}
+.px-prototype-nav a:first-child{font-size:19px;color:#ffad66}
+.px-prototype-nav a:hover{text-decoration:underline}
+.hero{padding-block:64px!important;background:radial-gradient(ellipse at 85% 15%,#472714 0%,transparent 53%),linear-gradient(135deg,#0d0d0e,#1c1815)!important}
+.hero h1{letter-spacing:-.035em;line-height:1.12}
+main>section:not(.hero){background:#101010!important}
+.tile,.card,.panel,.deskbox,.note,.notice,.quote,.support-call{background:linear-gradient(145deg,#25201c,#171616)!important;color:#f5eee7!important;border:1px solid #684326!important}
+.tile,.card{padding:24px}
+.tile h3,.card h3{color:#ffb467}
+.px-bank-strip{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0}.px-bank-strip a{padding:10px 16px;border:1px solid #8c562e;border-radius:7px;text-decoration:none}
+.px-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}.px-kpis strong{display:block;color:#ffb467;font-size:30px}
+.px-status{font-size:13px;color:#d3b9a3;letter-spacing:.02em}
+.px-red-theme .hero{background:linear-gradient(120deg,#101010,#321418)!important}
+.px-red-theme .verse{background:#1d1415!important;color:#fff0e7!important;border-color:#762c33!important}
+.px-red-theme .px-prototype-nav a{color:#ff9999}
+@media(max-width:680px){.px-prototype-nav{padding:14px;gap:10px}.hero{padding-block:42px!important}.px-prototype-nav a{font-size:12px}}

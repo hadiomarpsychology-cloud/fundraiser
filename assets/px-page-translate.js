@@ -1,10 +1,10 @@
-/* LDT: optional private, on-device translation for complete visible page text. */
+/* psychologistx.art: optional private, on-device translation for complete visible page text. */
 (function(){
 "use strict";
 const supported=new Set("ar bg bn cs da de el en es fi fr he hi hr hu id it ja kn ko lt mr nl no pl pt ro ru sk sl sv ta te th tr uk vi zh zh-Hant".split(" "));
 const originalText=new WeakMap(),tracked=new Set(),originalAttrs=new Map();
 let requestId=0, observer=null, activeTarget=null, sessions=null, translating=false;
-const ignore="script,style,noscript,svg,canvas,code,[contenteditable],.ldt-global,[data-ldt-no-translate],iframe";
+const ignore="script,style,noscript,svg,canvas,code,[contenteditable],.px-global,[data-px-no-translate],iframe";
 function normal(code){if(code==="en-GB")return "en";if(code==="zh-CN")return "zh";if(code==="zh-TW")return "zh-Hant";return code;}
 function source(text,node){
  const owner=node.parentElement, lang=owner?.closest("[lang]")?.getAttribute("lang");
@@ -53,7 +53,7 @@ async function translateValue(value,from,to,session){
  for(const part of parts)done.push(await session.translate(part));
  return done.join("");
 }
-function status(message){document.dispatchEvent(new CustomEvent("ldt-translation-status",{detail:message}));}
+function status(message){document.dispatchEvent(new CustomEvent("px-translation-status",{detail:message}));}
 async function start(code){
  const token=++requestId,target=normal(code);
  restore();
@@ -129,6 +129,6 @@ async function start(code){
   return false;
  }
 }
-window.LDTFullTranslate=start;
-window.LDTRestoreText=function(){requestId++;restore();status("Original content restored.");};
+window.pxFullTranslate=start;
+window.pxRestoreText=function(){requestId++;restore();status("Original content restored.");};
 })();

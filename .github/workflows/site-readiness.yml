@@ -1,4 +1,4 @@
-name: LDT site readiness checks
+name: site readiness checks
 on:
   push:
     branches: [main]
